@@ -10,22 +10,28 @@ export enum TokenType {
   LESS_THAN_OR_EQUAL_TO = '<=',
   GREATER_THAN_OR_EQUAL_TO = '>=',
   EQUALS_EQUALS = '==',
+  OPEN_BRACKET = '(',
+  CLOSE_BRACKET = ')',
+  OPEN_BRACE = '{',
+  CLOSE_BRACE = '}',
+  OPEN_SQUARE_BRACKET = '[',
+  CLOSE_SQUARE_BRACKET = ']',
 }
 
 export interface Token {
-    lineNumber:number,
-    characterPosition:number,
-    tokenType: TokenType
-  }
+  lineNumber: number,
+  characterPosition: number,
+  tokenType: TokenType
+}
 
-  export interface Tokenizer {
-    getTokens(): Token[]
-  }
+export interface Tokenizer {
+  getTokens(): Token[]
+}
 
-  export class TokenizerFactory {
-    static getTokenizer(code: string): Tokenizer {
-      return new DefaultTokenizer(code)
-    }
+export class TokenizerFactory {
+  static getTokenizer(code: string): Tokenizer {
+    return new DefaultTokenizer(code)
   }
+}
 
 
