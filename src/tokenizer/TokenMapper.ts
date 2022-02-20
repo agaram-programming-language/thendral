@@ -51,6 +51,28 @@ export class TokenMapper {
         case ']':
           this.addToken(TokenType.CLOSE_SQUARE_BRACKET)
           break
+
+        case '&':
+          if (this.iterator.peek() === '&') {
+            this.iterator.advance()
+            this.addToken(TokenType.LOGICAL_AND)
+          } else {
+            //@TODO
+           throw new Error('')
+          }
+          break
+
+        case '|':
+          if (this.iterator.peek() === '|') {
+            this.iterator.advance()
+            this.addToken(TokenType.LOGICAL_OR)
+          } else {
+            //@TODO
+            throw new Error('')
+          }
+          break
+
+
         case '<':
           if (this.iterator.peek() === '=') {
             this.iterator.advance()

@@ -16,13 +16,16 @@ export enum TokenType {
   CLOSE_BRACE,
   OPEN_SQUARE_BRACKET,
   CLOSE_SQUARE_BRACKET,
-  AND,
+
   OR,
   KEYWORD,
   STRING,
   LESS_THAN,
   GREATER_THAN,
-  EQUALS
+  EQUALS,
+
+  LOGICAL_AND,
+  LOGICAL_OR
 }
 
 export interface Token {

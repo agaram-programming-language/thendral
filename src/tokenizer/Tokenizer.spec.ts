@@ -56,8 +56,8 @@ describe("Tokenizer Tests", () => {
     expect(tokens.length).toEqual(2)
     expect(tokens.map(e => e.type)).toEqual(
       [
-        TokenType.AND,
-        TokenType.OR,
+        TokenType.LOGICAL_AND,
+        TokenType.LOGICAL_OR,
       ])
   });
 
