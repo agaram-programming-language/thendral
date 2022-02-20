@@ -1,4 +1,4 @@
-import {Token, Tokenizer} from "./Tokenizer";
+import {Token, Tokenizer, TokenType} from "./Tokenizer";
 
 
 export class DefaultTokenizer implements Tokenizer {
@@ -32,6 +32,12 @@ export class DefaultTokenizer implements Tokenizer {
 
     while (this.characters.length !== 0) {
       const character = this.consume();
+      const type = character as TokenType;
+      this.tokens.push({
+        lineNumber: this.lineNumber,
+        characterPosition: this.characterPos,
+        tokenType: type
+      })
     }
 
   }

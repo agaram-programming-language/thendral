@@ -9,8 +9,8 @@ export enum TokenType {
 }
 
 export interface Token {
-    lineNumber:string,
-    characterPosition:string,
+    lineNumber:number,
+    characterPosition:number,
     tokenType: TokenType
   }
 
