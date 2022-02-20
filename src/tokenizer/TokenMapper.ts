@@ -33,6 +33,25 @@ export class TokenMapper {
           this.addToken(TokenType.MODULO)
           break
 
+        case '(':
+          this.addToken(TokenType.OPEN_BRACKET)
+          break
+        case ')':
+          this.addToken(TokenType.CLOSE_BRACKET)
+          break
+        case '{':
+          this.addToken(TokenType.OPEN_BRACE)
+          break
+        case '}':
+          this.addToken(TokenType.CLOSE_BRACE)
+          break
+        case '[':
+          this.addToken(TokenType.OPEN_SQUARE_BRACKET)
+          break
+        case ']':
+          this.addToken(TokenType.CLOSE_SQUARE_BRACKET)
+          break
+
         case '<':
           if (this.iterator.peek() === '=') {
             this.iterator.advance()
