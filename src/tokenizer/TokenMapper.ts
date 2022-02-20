@@ -102,6 +102,16 @@ export class TokenMapper {
           }
           break
 
+        case "'":
+          let value:string = '';
+          while ( ! this.iterator.isAtEnd() && this.iterator.peek() !== "'" ) {
+            value += this.iterator.consume()
+          }
+          // consume the stray ' character from string
+          this.iterator.advance();
+          this.addTokenWithValue(TokenType.STRING, value)
+          break
+
 
       }
 
@@ -115,6 +125,15 @@ export class TokenMapper {
       type: type,
       lineNumber: 1,
       characterPosition: 1
+    })
+  }
+
+  addTokenWithValue(type: TokenType, value:string) {
+    this.tokens.push({
+      type: type,
+      lineNumber: 1,
+      characterPosition: 1,
+      value: value
     })
   }
 
