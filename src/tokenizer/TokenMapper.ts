@@ -1,3 +1,4 @@
+
 import {TokenIterator} from "./TokenIterator";
 import {Token, TokenType} from "./Tokenizer";
 
@@ -14,6 +15,17 @@ export class TokenMapper {
     while (!this.iterator.isAtEnd()) {
 
       const token = this.iterator.consume()
+
+
+      // Handle numbers without going in to character loop.
+      if ( this.iterator.isNumber(token) ) {
+        let number: string = ''
+        while (! this.iterator.isAtEnd() ) {
+          number += this.iterator.consume()
+        }
+        this.addTokenWithValue(TokenType.NUMBER, number)
+        continue
+      }
 
       switch (token) {
 
@@ -111,8 +123,6 @@ export class TokenMapper {
           this.iterator.advance();
           this.addTokenWithValue(TokenType.STRING, value)
           break
-
-
       }
 
     }

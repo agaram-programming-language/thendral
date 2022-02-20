@@ -1,6 +1,10 @@
+import { isNumber } from "util";
 import {Iterator} from "../iterator/iterator"
 
 export class TokenIterator extends Iterator<string> {
+  isNumber(value:string):boolean {
+     return typeof value === 'number';
+  }
 
   private lineNumber = 1;
   private characterPos = 1;
