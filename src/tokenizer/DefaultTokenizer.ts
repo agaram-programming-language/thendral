@@ -24,15 +24,21 @@ export class DefaultTokenizer implements Tokenizer {
   }
 
   private peek(): string {
-    // @TODO
-    return '';
+    return this.characters[0];
   }
 
   private iterateThroughTokens() {
 
     while (this.characters.length !== 0) {
-      const character = this.consume();
-      const type = character as TokenType;
+      let token = this.consume();
+      // Ignore spaces.
+      if (token === ' ') {
+        continue;
+      }
+
+      token = this.mayBeTwoCharacterToken(token)
+
+      const type = token as TokenType;
       this.tokens.push({
         lineNumber: this.lineNumber,
         characterPosition: this.characterPos,
@@ -42,4 +48,25 @@ export class DefaultTokenizer implements Tokenizer {
 
   }
 
+  private isAtEnd() {
+    return this.characters.length === 0
+  }
+
+  private mayBeTwoCharacterToken(token: string): string {
+    // No point in looking when there are no characters left.
+    if (this.isAtEnd()) {
+      return token
+    }
+
+    const validTwoCharacterTokens = ['<', '>', '=']
+    if (!validTwoCharacterTokens.includes(token)) {
+      return token;
+    }
+
+    if ( this.peek() !== '=' ) {
+      return token
+    }
+
+    return token + this.consume();
+  }
 }
