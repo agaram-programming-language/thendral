@@ -33,6 +33,35 @@ export class TokenMapper {
           this.addToken(TokenType.MODULO)
           break
 
+        case '<':
+          if (this.iterator.peek() === '=') {
+            this.iterator.advance()
+            this.addToken(TokenType.LESS_THAN_OR_EQUAL_TO)
+          } else {
+            this.addToken(TokenType.LESS_THAN)
+          }
+          break
+
+        case '>':
+          if (this.iterator.peek() === '=') {
+            this.iterator.advance()
+            this.addToken(TokenType.GREATER_THAN_OR_EQUAL_TO)
+          }
+          else {
+            this.addToken(TokenType.GREATER_THAN)
+          }
+          break
+
+        case '=':
+          if (this.iterator.peek() === '=') {
+            this.iterator.advance()
+            this.addToken(TokenType.EQUALS_EQUALS)
+          }
+          else {
+            this.addToken(TokenType.EQUALS)
+          }
+          break
+
 
       }
 

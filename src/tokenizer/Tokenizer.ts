@@ -19,7 +19,10 @@ export enum TokenType {
   AND,
   OR,
   KEYWORD,
-  STRING
+  STRING,
+  LESS_THAN,
+  GREATER_THAN,
+  EQUALS
 }
 
 export interface Token {
