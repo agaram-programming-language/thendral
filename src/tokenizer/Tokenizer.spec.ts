@@ -21,7 +21,6 @@ describe("Tokenizer Tests", () => {
 
   it("Test should identify two character tokens", () => {
     const tokens = TokenizerFactory.getTokenizer("< > = >= <= ==").getTokens()
-    console.log(tokens)
     expect(tokens.length).toEqual(6)
     expect(tokens.map(e => e.type)).toEqual(
       [
@@ -37,7 +36,6 @@ describe("Tokenizer Tests", () => {
 
   it("Test should identify braces and brackets", () => {
     const tokens = TokenizerFactory.getTokenizer("(){}[]").getTokens()
-    console.log(tokens)
     expect(tokens.length).toEqual(6)
     expect(tokens.map(e => e.type)).toEqual(
       [
@@ -72,6 +70,19 @@ describe("Tokenizer Tests", () => {
     expect(tokens.map(e => e.value)).toEqual(
       [
         'random_string',
+      ])
+  });
+
+  it("Test should identify number", () => {
+    const tokens = TokenizerFactory.getTokenizer("12345").getTokens()
+    expect(tokens.length).toEqual(1)
+    expect(tokens.map(e => e.type)).toEqual(
+      [
+        TokenType.NUMBER,
+      ])
+    expect(tokens.map(e => e.value)).toEqual(
+      [
+        '12345',
       ])
   });
 

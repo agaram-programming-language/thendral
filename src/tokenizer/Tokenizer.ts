@@ -25,7 +25,8 @@ export enum TokenType {
   EQUALS,
 
   LOGICAL_AND,
-  LOGICAL_OR
+  LOGICAL_OR,
+  NUMBER
 }
 
 export interface Token {
