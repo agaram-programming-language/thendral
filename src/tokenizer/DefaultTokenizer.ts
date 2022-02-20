@@ -20,6 +20,8 @@ export class DefaultTokenizer implements Tokenizer {
   }
 
   private consume(): string {
+    // Increase the character position as we consume tokens.
+    this.characterPos += 1;
     return this.characters.shift();
   }
 
@@ -27,23 +29,20 @@ export class DefaultTokenizer implements Tokenizer {
     return this.characters[0];
   }
 
+  private advance(): void {
+    this.characters.shift()
+  }
+
   private iterateThroughTokens() {
 
     while (!this.isAtEnd()) {
+
       let token = this.consume();
-      // Ignore spaces.
-      if (token === ' ') {
-        continue;
+
+      switch (token) {
+
       }
 
-      token = this.mayBeTwoCharacterToken(token)
-
-      const type = token as TokenType;
-      this.tokens.push({
-        lineNumber: this.lineNumber,
-        characterPosition: this.characterPos,
-        tokenType: type
-      })
     }
 
   }
@@ -64,7 +63,7 @@ export class DefaultTokenizer implements Tokenizer {
       '<=', '>=', '==', '&&', '||'
     ]
 
-    if ( validTokens.includes(currentToken) ) {
+    if (validTokens.includes(currentToken)) {
       return token + this.consume();
     }
 
