@@ -25,7 +25,7 @@ export enum TokenType {
 export interface Token {
   lineNumber: number,
   characterPosition: number,
-  tokenType: TokenType,
+  type: TokenType,
   value?: string
 }
 

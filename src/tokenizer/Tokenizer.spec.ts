@@ -8,7 +8,7 @@ describe("Tokenizer Tests", () => {
   it("Test should identify numerical tokens", () => {
     const tokens = TokenizerFactory.getTokenizer("+-*/%").getTokens()
     expect(tokens.length).toEqual(5)
-    expect(tokens.map(e => e.tokenType)).toEqual(
+    expect(tokens.map(e => e.type)).toEqual(
       [
         TokenType.PLUS,
         TokenType.MINUS,
@@ -23,7 +23,7 @@ describe("Tokenizer Tests", () => {
     const tokens = TokenizerFactory.getTokenizer(">= <= ==").getTokens()
     console.log(tokens)
     expect(tokens.length).toEqual(3)
-    expect(tokens.map(e => e.tokenType)).toEqual(
+    expect(tokens.map(e => e.type)).toEqual(
       [
         TokenType.GREATER_THAN_OR_EQUAL_TO,
         TokenType.LESS_THAN_OR_EQUAL_TO,
@@ -35,7 +35,7 @@ describe("Tokenizer Tests", () => {
     const tokens = TokenizerFactory.getTokenizer("(){}[]").getTokens()
     console.log(tokens)
     expect(tokens.length).toEqual(6)
-    expect(tokens.map(e => e.tokenType)).toEqual(
+    expect(tokens.map(e => e.type)).toEqual(
       [
         TokenType.OPEN_BRACKET,
         TokenType.CLOSE_BRACKET,
@@ -50,7 +50,7 @@ describe("Tokenizer Tests", () => {
   it("Test should identify logical operators", () => {
     const tokens = TokenizerFactory.getTokenizer("&&||").getTokens()
     expect(tokens.length).toEqual(2)
-    expect(tokens.map(e => e.tokenType)).toEqual(
+    expect(tokens.map(e => e.type)).toEqual(
       [
         TokenType.AND,
         TokenType.OR,
@@ -61,7 +61,7 @@ describe("Tokenizer Tests", () => {
   it("Test should identify string", () => {
     const tokens = TokenizerFactory.getTokenizer("'random_string'").getTokens()
     expect(tokens.length).toEqual(1)
-    expect(tokens.map(e => e.tokenType)).toEqual(
+    expect(tokens.map(e => e.type)).toEqual(
       [
         TokenType.STRING,
       ])
