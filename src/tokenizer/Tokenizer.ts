@@ -7,6 +7,7 @@ export enum TokenType {
   MULTIPLY = '*',
   DIVIDE = '/',
   MODULO = '%',
+  LESS_THAN_OR_EQUAL_TO = '<=',
 }
 
 export interface Token {

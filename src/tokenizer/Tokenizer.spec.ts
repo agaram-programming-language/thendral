@@ -6,7 +6,7 @@ describe("Tokenizer Tests", () => {
 
 
 
-  it("Test should identify valid tokens", () => {
+  it("Test should identify numerical tokens", () => {
     const tokens = TokenizerFactory.getTokenizer("+-*/%").getTokens()
     expect(tokens.length).toEqual(5)
     expect(tokens.map(e=>e.tokenType)).toEqual(
@@ -19,12 +19,19 @@ describe("Tokenizer Tests", () => {
       ])
   });
 
-  //
-  // it("Test should throw exception for invalid token", () => {
-  //   expect( TokenizerFactory.getTokenizer("").getTokens()).toThrowError(4)
-  // });
-  //
-  //
+
+  it("Test should identify two character tokens", () => {
+    const tokens = TokenizerFactory.getTokenizer(">= <= ==").getTokens()
+    expect(tokens.length).toEqual(5)
+    expect(tokens.map(e=>e.tokenType)).toEqual(
+      [
+        TokenType.LESS_THAN_OR_EQUAL_TO,
+        TokenType.GREATER_THAN_OR_EQUAL_TO,
+        TokenType.EQUALS_EQUALS,
+      ])
+  });
+
+
 
 
 })
