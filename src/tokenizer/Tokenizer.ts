@@ -19,13 +19,16 @@ export enum TokenType {
 
   // Logical operators.
   AND = '&&',
-  OR = '||'
+  OR = '||',
+
+  KEYWORD = 'KEYWORD',
 }
 
 export interface Token {
   lineNumber: number,
   characterPosition: number,
-  tokenType: TokenType
+  tokenType: TokenType,
+  value?: string
 }
 
 export interface Tokenizer {
