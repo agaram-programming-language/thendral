@@ -5,7 +5,8 @@ export enum TokenType {
   PLUS = '+',
   MINUS = '-',
   MULTIPLY = '*',
-  DIVIDE = '/'
+  DIVIDE = '/',
+  MODULO = '%',
 }
 
 export interface Token {
