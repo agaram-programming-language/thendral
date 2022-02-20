@@ -58,15 +58,16 @@ export class DefaultTokenizer implements Tokenizer {
       return token
     }
 
-    const validTwoCharacterTokens = ['<', '>', '=']
-    if (!validTwoCharacterTokens.includes(token)) {
-      return token;
+    const currentToken = token + this.peek();
+
+    const validTokens = [
+      '<=', '>=', '==', '&&', '||'
+    ]
+
+    if ( validTokens.includes(currentToken) ) {
+      return token + this.consume();
     }
 
-    if ( this.peek() !== '=' ) {
-      return token
-    }
-
-    return token + this.consume();
+    return token
   }
 }

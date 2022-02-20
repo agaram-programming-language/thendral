@@ -47,4 +47,15 @@ describe("Tokenizer Tests", () => {
   });
 
 
+  it("Test should identify logical operators", () => {
+    const tokens = TokenizerFactory.getTokenizer("&&||").getTokens()
+    expect(tokens.length).toEqual(2)
+    expect(tokens.map(e => e.tokenType)).toEqual(
+      [
+        TokenType.AND,
+        TokenType.OR,
+      ])
+  });
+
+
 })

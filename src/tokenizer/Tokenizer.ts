@@ -16,6 +16,10 @@ export enum TokenType {
   CLOSE_BRACE = '}',
   OPEN_SQUARE_BRACKET = '[',
   CLOSE_SQUARE_BRACKET = ']',
+
+  // Logical operators.
+  AND = '&&',
+  OR = '||'
 }
 
 export interface Token {
