@@ -22,7 +22,7 @@ describe("Tokenizer Tests", () => {
   it("Test should identify two character tokens", () => {
     const tokens = TokenizerFactory.getTokenizer("< > = >= <= ==").getTokens()
     console.log(tokens)
-    expect(tokens.length).toEqual(3)
+    expect(tokens.length).toEqual(6)
     expect(tokens.map(e => e.type)).toEqual(
       [
         TokenType.LESS_THAN,
