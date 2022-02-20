@@ -29,7 +29,7 @@ export class DefaultTokenizer implements Tokenizer {
 
   private iterateThroughTokens() {
 
-    while (this.characters.length !== 0) {
+    while (!this.isAtEnd()) {
       let token = this.consume();
       // Ignore spaces.
       if (token === ' ') {

@@ -58,16 +58,16 @@ describe("Tokenizer Tests", () => {
   });
 
 
-  it("Test should identify variable keyword", () => {
-    const tokens = TokenizerFactory.getTokenizer("நிலையற்ற").getTokens()
+  it("Test should identify string", () => {
+    const tokens = TokenizerFactory.getTokenizer("'random_string'").getTokens()
     expect(tokens.length).toEqual(1)
     expect(tokens.map(e => e.tokenType)).toEqual(
       [
-        TokenType.KEYWORD,
+        TokenType.STRING,
       ])
     expect(tokens.map(e => e.value)).toEqual(
       [
-        'நிலையற்ற',
+        'random_string',
       ])
   });
 
