@@ -8,6 +8,8 @@ export enum TokenType {
   DIVIDE = '/',
   MODULO = '%',
   LESS_THAN_OR_EQUAL_TO = '<=',
+  GREATER_THAN_OR_EQUAL_TO = '>=',
+  EQUALS_EQUALS = '==',
 }
 
 export interface Token {
