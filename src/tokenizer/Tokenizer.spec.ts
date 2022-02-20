@@ -8,28 +8,29 @@ describe("Tokenizer Tests", () => {
   it("Test should identify numerical tokens", () => {
     const tokens = TokenizerFactory.getTokenizer("+-*/%").getTokens()
     expect(tokens.length).toEqual(5)
-    expect(tokens.map(e => e.type)).toEqual(
+    expect(tokens.map(e => TokenType[e.type])).toEqual(
       [
-        TokenType.PLUS,
-        TokenType.MINUS,
-        TokenType.MULTIPLY,
-        TokenType.DIVIDE,
-        TokenType.MODULO
+        TokenType[TokenType.PLUS],
+        TokenType[TokenType.MINUS],
+        TokenType[TokenType.MULTIPLY],
+        TokenType[TokenType.DIVIDE],
+        TokenType[TokenType.MODULO]
       ])
   });
 
 
   it("Test should identify two character tokens", () => {
     const tokens = TokenizerFactory.getTokenizer("< > = >= <= ==").getTokens()
+    console.log(tokens)
     expect(tokens.length).toEqual(6)
-    expect(tokens.map(e => e.type)).toEqual(
+    expect(tokens.map(e => TokenType[e.type])).toEqual(
       [
-        TokenType.LESS_THAN,
-        TokenType.GREATER_THAN,
-        TokenType.EQUALS,
-        TokenType.GREATER_THAN_OR_EQUAL_TO,
-        TokenType.LESS_THAN_OR_EQUAL_TO,
-        TokenType.EQUALS_EQUALS,
+        TokenType[TokenType.LESS_THAN],
+        TokenType[TokenType.GREATER_THAN],
+        TokenType[TokenType.EQUALS],
+        TokenType[TokenType.GREATER_THAN_OR_EQUAL_TO],
+        TokenType[TokenType.LESS_THAN_OR_EQUAL_TO],
+        TokenType[TokenType.EQUALS_EQUALS],
 
       ])
   });

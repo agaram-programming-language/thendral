@@ -16,11 +16,10 @@ export class TokenMapper {
 
       const token = this.iterator.consume()
 
-
       // Handle numbers without going in to character loop.
       if ( this.iterator.isNumber(token) ) {
-        let number: string = ''
-        while (! this.iterator.isAtEnd() ) {
+        let number: string = token
+        while (! this.iterator.isAtEnd() && this.iterator.isNumber(this.iterator.current()) ) {
           number += this.iterator.consume()
         }
         this.addTokenWithValue(TokenType.NUMBER, number)

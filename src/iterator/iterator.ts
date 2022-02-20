@@ -27,6 +27,13 @@ export abstract class Iterator<T> {
     this.items.shift()
   }
 
+  current():T {
+    if ( this.isAtEnd() ) {
+      throw new Error("Attempting to get current token at end")
+    }
+    return this.items[0];
+  }
+
 
   peek(): T | boolean {
     if ( this.isAtEnd() ) {
