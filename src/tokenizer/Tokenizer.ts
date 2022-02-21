@@ -27,7 +27,14 @@ export enum TokenType {
   LOGICAL_AND,
   LOGICAL_OR,
   NUMBER,
-  VARIABLE
+  VARIABLE,
+  CONSTANT,
+  IF,
+  ELSE,
+  WHILE,
+  TRUE,
+  FALSE,
+  FOR
 }
 
 

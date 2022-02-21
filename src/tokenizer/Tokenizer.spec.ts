@@ -89,11 +89,18 @@ describe("Tokenizer Tests", () => {
 
 
   it("Test should identify keyword", () => {
-    const tokens = TokenizerFactory.getTokenizer("நிலையற்ற").getTokens()
+    const tokens = TokenizerFactory.getTokenizer("நிலையற்ற நிலையான ஒருவேளை இல்லையென்றால் இருப்பின்வளையம் உண்மை பொய் ஆகவளையம்").getTokens()
     expect(tokens.length).toEqual(1)
     expect(tokens.map(e => e.type)).toEqual(
       [
         TokenType.VARIABLE,
+        TokenType.CONSTANT,
+        TokenType.IF,
+        TokenType.ELSE,
+        TokenType.WHILE,
+        TokenType.TRUE,
+        TokenType.FALSE,
+        TokenType.FOR
       ])
   });
 
