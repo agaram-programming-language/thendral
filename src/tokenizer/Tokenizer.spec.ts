@@ -89,8 +89,8 @@ describe("Tokenizer Tests", () => {
 
 
   it("Test should identify keyword", () => {
-    const tokens = TokenizerFactory.getTokenizer("நிலையற்ற நிலையான ஒருவேளை இல்லையென்றால் இருப்பின்வளையம் உண்மை பொய் ஆகவளையம்").getTokens()
-    expect(tokens.length).toEqual(8)
+    const tokens = TokenizerFactory.getTokenizer("நிலையற்ற நிலையான ஒருவேளை இல்லையென்றால் இருப்பின்வளையம் உண்மை பொய் ஆகவளையம் ஆ").getTokens()
+    expect(tokens.length).toEqual(9)
     expect(tokens.map(e => e.type)).toEqual(
       [
         TokenType.VARIABLE,
@@ -100,7 +100,8 @@ describe("Tokenizer Tests", () => {
         TokenType.WHILE,
         TokenType.TRUE,
         TokenType.FALSE,
-        TokenType.FOR
+        TokenType.FOR,
+        TokenType.IDENTIFIER
       ])
   });
 
