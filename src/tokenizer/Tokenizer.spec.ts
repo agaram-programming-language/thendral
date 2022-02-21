@@ -88,4 +88,18 @@ describe("Tokenizer Tests", () => {
   });
 
 
+  it("Test should identify keyword", () => {
+    const tokens = TokenizerFactory.getTokenizer("நிலையற்ற").getTokens()
+    expect(tokens.length).toEqual(1)
+    expect(tokens.map(e => e.type)).toEqual(
+      [
+        TokenType.VARIABLE,
+      ])
+    expect(tokens.map(e => e.value)).toEqual(
+      [
+        '',
+      ])
+  });
+
+
 })

@@ -26,8 +26,10 @@ export enum TokenType {
 
   LOGICAL_AND,
   LOGICAL_OR,
-  NUMBER
+  NUMBER,
+  VARIABLE
 }
+
 
 export interface Token {
   lineNumber: number,
