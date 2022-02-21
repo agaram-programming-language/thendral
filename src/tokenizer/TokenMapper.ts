@@ -140,6 +140,10 @@ export class TokenMapper {
 
     }
 
+
+    // Add endof file token to denote the file end.
+    this.addToken(TokenType.EOF);
+
     return this.tokens;
   }
 

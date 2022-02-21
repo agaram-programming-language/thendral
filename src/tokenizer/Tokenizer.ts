@@ -35,7 +35,8 @@ export enum TokenType {
   TRUE,
   FALSE,
   FOR,
-  IDENTIFIER
+  IDENTIFIER,
+  EOF,
 }
 
 
