@@ -2,6 +2,10 @@
 import {TokenIterator} from "./TokenIterator";
 import {Token, TokenType} from "./Tokenizer";
 
+
+
+
+
 export class TokenMapper {
 
   private readonly tokens: Token[] = []
@@ -30,9 +34,9 @@ export class TokenMapper {
       if ( this.iterator.isTamilCharacter(token) ) {
         let keyword: string = token
         while (! this.iterator.isAtEnd() && this.iterator.isTamilCharacter(this.iterator.current()) ) {
-          this.iterator.advance()
+          keyword += this.iterator.consume()
         }
-        this.addTokenWithValue(TokenType.VARIABLE, keyword)
+        this.addTokenWithValue(this.getTokenTypeForKeyword(keyword), keyword)
         continue
       }
 
@@ -137,6 +141,20 @@ export class TokenMapper {
     }
 
     return this.tokens;
+  }
+
+  getTokenTypeForKeyword(keyword: string): TokenType {
+    const keywordMap =  {
+      'நிலையற்ற' : TokenType.VARIABLE,
+      'நிலையான' : TokenType.CONSTANT,
+      'ஒருவேளை' : TokenType.IF,
+      'இல்லையென்றால்' : TokenType.ELSE,
+      'இருப்பின்வளையம்' : TokenType.WHILE,
+      'உண்மை' : TokenType.TRUE,
+      'பொய்' : TokenType.FALSE,
+      'ஆகவளையம்' : TokenType.FOR
+    }
+    return keywordMap[keyword] ? keywordMap[keyword] : TokenType.IDENTIFIER
   }
 
   addToken(type: TokenType) {

@@ -34,7 +34,8 @@ export enum TokenType {
   WHILE,
   TRUE,
   FALSE,
-  FOR
+  FOR,
+  IDENTIFIER
 }
 
 
