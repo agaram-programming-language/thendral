@@ -95,10 +95,6 @@ describe("Tokenizer Tests", () => {
       [
         TokenType.VARIABLE,
       ])
-    expect(tokens.map(e => e.value)).toEqual(
-      [
-        '',
-      ])
   });
 
 

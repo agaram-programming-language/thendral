@@ -26,6 +26,16 @@ export class TokenMapper {
         continue
       }
 
+      // Handle keywords without going in to character loop
+      if ( this.iterator.isTamilCharacter(token) ) {
+        let keyword: string = token
+        while (! this.iterator.isAtEnd() && this.iterator.isTamilCharacter(this.iterator.current()) ) {
+          this.iterator.advance()
+        }
+        this.addTokenWithValue(TokenType.VARIABLE, keyword)
+        continue
+      }
+
       switch (token) {
 
         case '+':
