@@ -1,6 +1,13 @@
 program -> declaration*
 
-declaration -> 
+declaration -> variable_declaration | constant_declaration | function_declaration | statment;
+
+variable_declaration -> "நிலையற்ற" IDENTIFIER '=' expression
+constant_declaration -> "நிலையான" IDENTIFIER '=' expression
+function_declaration -> "செயல்பாடு" IDENTIFIER '(' parameters? ')' { block }
+
+
+
 
 
 
