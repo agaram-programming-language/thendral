@@ -1,3 +1,5 @@
+import {Token} from "../tokenizer/Tokenizer";
+
 export interface Statement {
 
 }
@@ -6,16 +8,16 @@ export interface Statement {
 export class BinaryExpr implements Statement {
 
   constructor(
-    private left: string,
-    private operator: string,
-    private right: string) {
+    private left: Token,
+    private operator: Token,
+    private right: Token) {
 
   }
 
 }
 
 export class UnaryExpr implements Statement {
-  constructor(private right: string|number, private operator?: string) {
+  constructor(public right: Token, public operator?: Token) {
 
   }
 }

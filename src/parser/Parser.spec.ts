@@ -1,4 +1,4 @@
-import {TokenizerFactory} from "../tokenizer/Tokenizer";
+import {Token, TokenizerFactory, TokenType} from "../tokenizer/Tokenizer";
 import {ParserFactory} from "./ParserFactory";
 import {UnaryExpr} from "./ParserTypes";
 
@@ -9,7 +9,9 @@ describe("Parser tests", () => {
 
     const tokens = TokenizerFactory.getTokenizer("-2").getTokens()
     const statements = ParserFactory.getParser(tokens).parse()
-    expect(statements[0] instanceof UnaryExpr ).toBeTrue()
+    const unaryExpr:UnaryExpr = statements[0] as UnaryExpr
+    expect(unaryExpr.operator.type).toEqual(TokenType.MINUS)
+    expect(unaryExpr.right.type).toEqual(TokenType.NUMBER)
   });
 
 })
