@@ -1,6 +1,6 @@
-import {Token, TokenizerFactory, TokenType} from "../tokenizer/Tokenizer";
+import {TokenizerFactory, TokenType} from "../tokenizer/Tokenizer";
 import {ParserFactory} from "./ParserFactory";
-import {UnaryExpr} from "./ParserTypes";
+import {LiteralExpr, UnaryExpr} from "./ParserTypes";
 
 describe("Parser tests", () => {
 
@@ -9,9 +9,11 @@ describe("Parser tests", () => {
 
     const tokens = TokenizerFactory.getTokenizer("-2").getTokens()
     const statements = ParserFactory.getParser(tokens).parse()
+    console.log(statements)
     const unaryExpr:UnaryExpr = statements[0] as UnaryExpr
     expect(unaryExpr.operator.type).toEqual(TokenType.MINUS)
-    expect(unaryExpr.right.type).toEqual(TokenType.NUMBER)
+    expect(unaryExpr.right instanceof LiteralExpr).toBeTrue()
+    expect((unaryExpr.right as LiteralExpr).value.type).toEqual(TokenType.NUMBER)
   });
 
 })

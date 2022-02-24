@@ -17,7 +17,14 @@ export class BinaryExpr implements Statement {
 }
 
 export class UnaryExpr implements Statement {
-  constructor(public right: Token, public operator?: Token) {
+  constructor(public operator: Token, public right: Statement) {
 
   }
+}
+
+export class LiteralExpr implements Statement {
+
+    constructor(public value:Token) {
+    }
+
 }

@@ -8,6 +8,7 @@ export class DefaultParser implements Parser {
   private mapper: ParserMapper;
 
   constructor(private tokens: Token[]) {
+    console.log(tokens)
     this.mapper = new ParserMapper(
       new ParserIterator(tokens)
     )
