@@ -10,15 +10,15 @@ export class ParserMapper {
 
   }
 
-
   getStatements():Statement[] {
     this.startParsing()
     return this.statements;
   }
 
-
   private startParsing() {
-
+    // while ( this.iterator.isAtEnd() ) {
+    //
+    // }
   }
 
 }
