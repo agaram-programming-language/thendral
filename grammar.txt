@@ -7,6 +7,9 @@ constant_declaration -> "நிலையான" IDENTIFIER '=' expression
 function_declaration -> "செயல்பாடு" IDENTIFIER '(' parameters? ')' { block }
 
 
+unary_expr = NUMBER | STRING |
+
+
 
 
 
