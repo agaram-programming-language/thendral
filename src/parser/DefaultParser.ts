@@ -5,6 +5,7 @@ import {Statement} from "./ParserTypes";
 export class DefaultParser implements Parser {
 
   constructor(private tokens:Token[]) {
+
   }
 
   parse(): Statement[] {
