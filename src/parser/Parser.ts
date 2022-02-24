@@ -1,6 +1,4 @@
-export interface Statement {
-
-}
+import {Statement} from "./ParserTypes";
 
 
 export interface Parser {
@@ -8,3 +6,4 @@ export interface Parser {
   parse(): Statement[]
 
 }
+
