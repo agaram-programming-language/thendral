@@ -1,6 +1,6 @@
 import {TokenizerFactory, TokenType} from "../tokenizer/Tokenizer";
 import {ParserFactory} from "./ParserFactory";
-import {LiteralExpr, UnaryExpr} from "./ParserTypes";
+import {BinaryExpr, LiteralExpr, UnaryExpr} from "./ParserTypes";
 
 describe("Parser tests", () => {
 
@@ -27,6 +27,14 @@ describe("Parser tests", () => {
     expect((nestedExpr.right as LiteralExpr).value.value).toEqual("2")
   });
 
+  it("Test should correctly parse the binary expression", () => {
+    const tokens = TokenizerFactory.getTokenizer("-2 + 2").getTokens()
+    const statements = ParserFactory.getParser(tokens).parse()
+    const binaryExpr:BinaryExpr = statements[0] as BinaryExpr
+    expect(binaryExpr.operator.type).toEqual(TokenType.MINUS)
+    expect(binaryExpr.left instanceof UnaryExpr).toBeTrue()
+    expect(binaryExpr.right instanceof UnaryExpr).toBeTrue()
+  });
 
 
 

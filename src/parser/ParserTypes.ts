@@ -8,9 +8,9 @@ export interface Statement {
 export class BinaryExpr implements Statement {
 
   constructor(
-    private left: Token,
-    private operator: Token,
-    private right: Token) {
+    public left: Statement,
+    public operator: Token,
+    public right: Statement) {
 
   }
 
