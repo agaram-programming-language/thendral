@@ -27,7 +27,7 @@ export class ParserMapper {
   }
 
   private unary(): Statement {
-    console.log("trying to match minus")
+
     if ( this.iterator.match(TokenType.MINUS) ) {
       return new UnaryExpr(
         this.iterator.consume(),
@@ -38,7 +38,7 @@ export class ParserMapper {
   }
 
   private primary():Statement {
-    console.log("calling primary()")
+
     if (this.iterator.match(TokenType.NUMBER)) {
       return new LiteralExpr(this.iterator.consume());
     }
