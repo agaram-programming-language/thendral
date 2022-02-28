@@ -136,6 +136,16 @@ export class TokenMapper {
           this.iterator.advance();
           this.addTokenWithValue(TokenType.STRING, value)
           break
+        case "!":
+          if (this.iterator.peek() === '=') {
+            this.iterator.advance()
+            this.addToken(TokenType.NOT_EQUALS)
+          }
+          else {
+            // @TODO
+            throw new Error("should find next token to be =")
+          }
+          break
       }
 
     }
