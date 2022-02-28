@@ -15,7 +15,6 @@ export class BinaryExpr implements Expr {
     public left: Expr,
     public operator: Token,
     public right: Expr) {
-
   }
 
 }
