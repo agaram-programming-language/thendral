@@ -43,7 +43,7 @@ export class ParserMapper {
       return new LiteralExpr(this.iterator.consume().value);
     }
     else if ( this.iterator.match(TokenType.OPEN_BRACKET) ) {
-      this.iterator.advance()
+      this.iterator.advanceIf(TokenType.OPEN_BRACKET)
       const expr:Expr = this.expression();
       this.iterator.advanceIf(TokenType.CLOSE_BRACKET)
       return new GroupingExpr(expr)
