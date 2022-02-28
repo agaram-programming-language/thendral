@@ -1,0 +1,10 @@
+statement -> declaration | expression;
+expression -> equality;
+equality -> comparison ( NOT_EQUAL_TO  | EQUAL_TO comparison )* ;
+comparison -> term ( (GREATER_THAN | LESSER_THAN | GREATER_THAN_OR_EQUAL_TO | LESSER_THAN_OR_EQUAL_TO) term )* ;
+term -> factor ( ( PLUS | MINUS ) factor )* ;
+factor -> unary ( (STAR | DIVIDE ) unary )* ;
+unary -> ( MINUS | NOT ) literal;
+binary -> expression operator expression;
+grouping -> OPEN_BRACKET expression CLOSE_BRACKET;
+literal -> STRING | NUMBER | TRUE | FALSE;

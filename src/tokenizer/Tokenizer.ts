@@ -37,6 +37,7 @@ export enum TokenType {
   FOR,
   IDENTIFIER,
   EOF,
+  NOT_EQUALS,
 }
 
 

@@ -1,5 +1,5 @@
 import {ParserIterator} from "./ParserIterator";
-import {LiteralExpr, Statement, UnaryExpr} from "./ParserTypes";
+import {BinaryExpr, Expr, LiteralExpr, Statement, UnaryExpr} from "./ParserTypes";
 import {TokenType} from "../tokenizer/Tokenizer";
 
 export class ParserMapper {
@@ -23,7 +23,7 @@ export class ParserMapper {
   }
 
   private expression(): Statement {
-    return this.unary();
+    return this.equality();
   }
 
   private unary(): Statement {
@@ -44,5 +44,13 @@ export class ParserMapper {
     }
     // @TODO: cant parse primary.
     throw new Error()
+  }
+
+  private equality() {
+    let expression:Expr = this.comparsion()
+    while (this.iterator.match(TokenType.EQUALS_EQUALS, TokenType.)) {
+      expression = new BinaryExpr()
+    }
+    return expression;
   }
 }

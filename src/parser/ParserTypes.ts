@@ -4,25 +4,29 @@ export interface Statement {
 
 }
 
+export interface Expr extends Statement{
 
-export class BinaryExpr implements Statement {
+}
+
+
+export class BinaryExpr implements Expr {
 
   constructor(
-    public left: Statement,
+    public left: Expr,
     public operator: Token,
-    public right: Statement) {
+    public right: Expr) {
 
   }
 
 }
 
-export class UnaryExpr implements Statement {
-  constructor(public operator: Token, public right: Statement) {
+export class UnaryExpr implements Expr {
+  constructor(public operator: Token, public right: Expr) {
 
   }
 }
 
-export class LiteralExpr implements Statement {
+export class LiteralExpr implements Expr {
 
     constructor(public value:Token) {
     }
