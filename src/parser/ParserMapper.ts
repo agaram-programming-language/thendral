@@ -30,7 +30,7 @@ export class ParserMapper {
 
     if (this.iterator.match(TokenType.MINUS)) {
       return new UnaryExpr(
-        this.iterator.consume(),
+        this.iterator.consume().type,
         this.unary()
       )
     }
@@ -40,7 +40,7 @@ export class ParserMapper {
   private primary(): Statement {
 
     if (this.iterator.match(TokenType.NUMBER)) {
-      return new LiteralExpr(this.iterator.consume());
+      return new LiteralExpr(this.iterator.consume().value);
     }
     // @TODO: cant parse primary.
     throw new Error()
@@ -49,7 +49,7 @@ export class ParserMapper {
   private equality(): Expr {
     let expression: Expr = this.comparsion()
     while (this.iterator.match(TokenType.EQUALS_EQUALS, TokenType.NOT_EQUALS)) {
-      expression = new BinaryExpr(expression, this.iterator.consume(), this.comparsion())
+      expression = new BinaryExpr(expression, this.iterator.consume().type, this.comparsion())
     }
     return expression;
   }
@@ -57,7 +57,7 @@ export class ParserMapper {
   private comparsion(): Expr {
     let term: Expr = this.term()
     while (this.iterator.match(TokenType.GREATER_THAN, TokenType.GREATER_THAN_OR_EQUAL_TO, TokenType.LESS_THAN, TokenType.LESSER_THAN_OR_EQUAL_TO)) {
-      term = new BinaryExpr(term, this.iterator.consume(), this.term())
+      term = new BinaryExpr(term, this.iterator.consume().type, this.term())
     }
     return term;
   }
@@ -65,7 +65,7 @@ export class ParserMapper {
   private term() {
     let factor: Expr = this.factor()
     while (this.iterator.match(TokenType.PLUS, TokenType.MINUS)) {
-      factor = new BinaryExpr(factor, this.iterator.consume(), this.factor())
+      factor = new BinaryExpr(factor, this.iterator.consume().type, this.factor())
     }
     return factor;
   }
@@ -74,7 +74,7 @@ export class ParserMapper {
   private factor() {
     let unary: Expr = this.unary()
     while (this.iterator.match(TokenType.MULTIPLY, TokenType.DIVIDE)) {
-      unary = new BinaryExpr(unary, this.iterator.consume(), this.unary())
+      unary = new BinaryExpr(unary, this.iterator.consume().type, this.unary())
     }
     return unary;
   }
