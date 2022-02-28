@@ -16,6 +16,12 @@ export class BinaryExpr implements Expr {
     public operator: TokenType,
     public right: Expr) {
   }
+}
+
+export class GroupingExpr implements Expr {
+
+  constructor(public expr:Expr) {
+  }
 
 }
 
