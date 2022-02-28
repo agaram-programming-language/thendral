@@ -101,7 +101,7 @@ export class TokenMapper {
         case '<':
           if (this.iterator.peek() === '=') {
             this.iterator.advance()
-            this.addToken(TokenType.LESS_THAN_OR_EQUAL_TO)
+            this.addToken(TokenType.LESSER_THAN_OR_EQUAL_TO)
           } else {
             this.addToken(TokenType.LESS_THAN)
           }
@@ -142,8 +142,7 @@ export class TokenMapper {
             this.addToken(TokenType.NOT_EQUALS)
           }
           else {
-            // @TODO
-            throw new Error("should find next token to be =")
+            this.addToken(TokenType.NOT)
           }
           break
       }

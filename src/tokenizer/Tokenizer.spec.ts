@@ -21,7 +21,7 @@ describe("Tokenizer Tests", () => {
 
 
   it("Test should identify two character tokens", () => {
-    const tokens = TokenizerFactory.getTokenizer("< > = >= <= == !=").getTokens()
+    const tokens = TokenizerFactory.getTokenizer("< > = >= <= == != !").getTokens()
 
     expect(tokens.map(e => TokenType[e.type])).toEqual(
       [
@@ -29,9 +29,10 @@ describe("Tokenizer Tests", () => {
         TokenType[TokenType.GREATER_THAN],
         TokenType[TokenType.EQUALS],
         TokenType[TokenType.GREATER_THAN_OR_EQUAL_TO],
-        TokenType[TokenType.LESS_THAN_OR_EQUAL_TO],
+        TokenType[TokenType.LESSER_THAN_OR_EQUAL_TO],
         TokenType[TokenType.EQUALS_EQUALS],
         TokenType[TokenType.NOT_EQUALS],
+        TokenType[TokenType.NOT],
         TokenType[TokenType.EOF]
 
       ])

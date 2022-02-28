@@ -7,7 +7,7 @@ export enum TokenType {
   MULTIPLY,
   DIVIDE,
   MODULO,
-  LESS_THAN_OR_EQUAL_TO,
+  LESSER_THAN_OR_EQUAL_TO,
   GREATER_THAN_OR_EQUAL_TO,
   EQUALS_EQUALS,
   OPEN_BRACKET,
@@ -38,6 +38,7 @@ export enum TokenType {
   IDENTIFIER,
   EOF,
   NOT_EQUALS,
+  NOT,
 }
 
 
