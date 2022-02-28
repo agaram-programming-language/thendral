@@ -1,6 +1,6 @@
 import {TokenizerFactory, TokenType} from "../tokenizer/Tokenizer";
 import {ParserFactory} from "./ParserFactory";
-import {BinaryExpr, LiteralExpr, UnaryExpr} from "./ParserTypes";
+import {BinaryExpr, GroupingExpr, LiteralExpr, UnaryExpr} from "./ParserTypes";
 
 describe("Parser tests", () => {
 
@@ -36,6 +36,20 @@ describe("Parser tests", () => {
       new LiteralExpr("2")
     )
     const tokens = TokenizerFactory.getTokenizer("-2 + 2").getTokens()
+    const statements = ParserFactory.getParser(tokens).parse()
+    expect(statements[0]).toEqual(expectedStructure)
+  });
+
+
+  it("Test should correctly parse the grouping expression", () => {
+    const expectedStructure = new GroupingExpr(
+      new BinaryExpr(
+        new LiteralExpr("2"),
+        TokenType.PLUS,
+        new LiteralExpr("2")
+      )
+    )
+    const tokens = TokenizerFactory.getTokenizer("(2 + 2)").getTokens()
     const statements = ParserFactory.getParser(tokens).parse()
     expect(statements[0]).toEqual(expectedStructure)
   });

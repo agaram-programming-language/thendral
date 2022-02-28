@@ -25,4 +25,15 @@ export class ParserIterator extends Iterator<Token> {
   isAtEnd(): boolean {
     return super.isAtEnd() || this.unsafePeek().type === TokenType.EOF;
   }
+
+  advanceIf(expectedTokenType:TokenType) {
+    if ( this.isAtEnd() ) {
+      throw new Error("cant advance, reached EOF")
+    }
+    const token = this.unsafePeek();
+    if ( token.type !== expectedTokenType ) {
+      throw new Error(`expected ${expectedTokenType} but got ${token.type}`)
+    }
+    this.advance()
+  }
 }
