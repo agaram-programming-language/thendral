@@ -50,3 +50,8 @@ export class FunctionStmt implements Statement {
   constructor(public identifier:string, public parameters:string[], public body:Statement[] ) {
   }
 }
+
+export class BooleanExpr implements Expr {
+  constructor(public type: TokenType.TRUE | TokenType.FALSE) {
+  }
+}

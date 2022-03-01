@@ -1,5 +1,14 @@
 import {ParserIterator} from "./ParserIterator";
-import {AssignmentExpr, BinaryExpr, Expr, GroupingExpr, LiteralExpr, Statement, UnaryExpr} from "./ParserTypes";
+import {
+  AssignmentExpr,
+  BinaryExpr,
+  BooleanExpr,
+  Expr,
+  GroupingExpr,
+  LiteralExpr,
+  Statement,
+  UnaryExpr
+} from "./ParserTypes";
 import {TokenType} from "../tokenizer/Tokenizer";
 
 export class ParserMapper {
@@ -46,6 +55,9 @@ export class ParserMapper {
       const expr: Expr = this.expression();
       this.iterator.advanceIf(TokenType.CLOSE_BRACKET)
       return new GroupingExpr(expr)
+    }
+    else if ( this.iterator.match(TokenType.TRUE, TokenType.FALSE) ) {
+      return new BooleanExpr(<any>this.iterator.consume().type)
     }
     // @TODO: cant parse primary.
     throw new Error("cant parse primary expr")

@@ -1,7 +1,6 @@
 import {TokenizerFactory, TokenType} from "../tokenizer/Tokenizer";
 import {ParserFactory} from "./ParserFactory";
-import {AssignmentExpr, BinaryExpr, FunctionStmt, GroupingExpr, LiteralExpr, UnaryExpr} from "./ParserTypes";
-
+import {AssignmentExpr, BinaryExpr, BooleanExpr, GroupingExpr, LiteralExpr, UnaryExpr} from "./ParserTypes";
 
 
 describe("Parser tests", () => {
@@ -125,6 +124,21 @@ describe("Parser tests", () => {
       new AssignmentExpr("a", TokenType.VARIABLE, new LiteralExpr("2"))
 
     const tokens = TokenizerFactory.getTokenizer("நிலையற்ற a = 2").getTokens()
+    const statements = ParserFactory.getParser(tokens).parse()
+    expect(statements[0]).toEqual(expectedStructure)
+  })
+
+
+  it("test should correctly parse boolean expression", () => {
+
+    const expectedStructure =
+      new BinaryExpr(
+        new BooleanExpr(TokenType.TRUE),
+        TokenType.LOGICAL_OR,
+        new BooleanExpr(TokenType.FALSE)
+      )
+
+    const tokens = TokenizerFactory.getTokenizer("சரி || தவறு").getTokens()
     const statements = ParserFactory.getParser(tokens).parse()
     expect(statements[0]).toEqual(expectedStructure)
   })
