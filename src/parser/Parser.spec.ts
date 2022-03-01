@@ -107,7 +107,7 @@ describe("Parser tests", () => {
     expect(statements[0]).toEqual(expectedStructure)
   });
 
-  it("test should correctly parse variable assignment", () => {
+  it("test should correctly parse constant assignment", () => {
 
     const expectedStructure =
       new AssignmentExpr("a", TokenType.CONSTANT, new LiteralExpr("2"))
@@ -115,7 +115,16 @@ describe("Parser tests", () => {
     const tokens = TokenizerFactory.getTokenizer("நிலையான a = 2").getTokens()
     const statements = ParserFactory.getParser(tokens).parse()
     expect(statements[0]).toEqual(expectedStructure)
+  })
 
+  it("test should correctly parse variable assignment", () => {
+
+    const expectedStructure =
+      new AssignmentExpr("a", TokenType.VARIABLE, new LiteralExpr("2"))
+
+    const tokens = TokenizerFactory.getTokenizer("நிலையற்ற a = 2").getTokens()
+    const statements = ParserFactory.getParser(tokens).parse()
+    expect(statements[0]).toEqual(expectedStructure)
   })
 
 
