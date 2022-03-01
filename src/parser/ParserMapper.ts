@@ -86,6 +86,14 @@ export class ParserMapper {
   }
 
   private or() {
+    let expr:Expr = this.and();
+    while (this.iterator.match(TokenType.LOGICAL_OR)) {
+      expr = new BinaryExpr(expr, this.iterator.consume().type, this.equality())
+    }
+    return expr
+  }
+
+  private and() {
     let expr:Expr = this.equality();
     while (this.iterator.match(TokenType.LOGICAL_OR)) {
       expr = new BinaryExpr(expr, this.iterator.consume().type, this.equality())
