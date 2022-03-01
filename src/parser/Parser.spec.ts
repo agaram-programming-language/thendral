@@ -68,4 +68,18 @@ describe("Parser tests", () => {
   });
 
 
+  it("Test should correctly parse equality operator", () => {
+    const expectedStructure =
+      new BinaryExpr(
+        new LiteralExpr("2"),
+        TokenType.EQUALS_EQUALS,
+        new LiteralExpr("2")
+      )
+
+    const tokens = TokenizerFactory.getTokenizer("2 == 2").getTokens()
+    const statements = ParserFactory.getParser(tokens).parse()
+    expect(statements[0]).toEqual(expectedStructure)
+  });
+
+
 })
