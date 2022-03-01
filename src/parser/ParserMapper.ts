@@ -102,20 +102,24 @@ export class ParserMapper {
 
   private statement() {
 
-    if (this.iterator.match(TokenType.CONSTANT)) {
-      const type: any = this.iterator.consumeIf(TokenType.CONSTANT, TokenType.VARIABLE).type
-      const identifier = this.iterator.consumeIf(TokenType.IDENTIFIER).value
-      // skip the equals sign
-      this.iterator.advanceIf(TokenType.EQUALS)
-
-      const expr = this.expression();
-      return new AssignmentExpr(
-        identifier,
-        type,
-        expr
-      )
+    if (this.iterator.match(TokenType.CONSTANT, TokenType.VARIABLE)) {
+      return this.variableStatement();
     }
 
     return this.expression();
+  }
+
+  private variableStatement() {
+    const type: any = this.iterator.consumeIf(TokenType.CONSTANT, TokenType.VARIABLE).type
+    const identifier = this.iterator.consumeIf(TokenType.IDENTIFIER).value
+    // skip the equals sign
+    this.iterator.advanceIf(TokenType.EQUALS)
+
+    const expr = this.expression();
+    return new AssignmentExpr(
+      identifier,
+      type,
+      expr
+    )
   }
 }
