@@ -163,9 +163,9 @@ export class TokenMapper {
       'ஒருவேளை' : TokenType.IF,
       'இல்லையென்றால்' : TokenType.ELSE,
       'இருப்பின்வளையம்' : TokenType.WHILE,
-      'உண்மை' : TokenType.TRUE,
-      'பொய்' : TokenType.FALSE,
-      'ஆகவளையம்' : TokenType.FOR
+      'சரி' : TokenType.TRUE,
+      'தவறு' : TokenType.FALSE,
+      'ஆகவளையம்' : TokenType.FOR,
     }
     return keywordMap[keyword] ? keywordMap[keyword] : TokenType.IDENTIFIER
   }
