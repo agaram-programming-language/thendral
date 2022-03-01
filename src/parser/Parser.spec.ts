@@ -1,6 +1,8 @@
 import {TokenizerFactory, TokenType} from "../tokenizer/Tokenizer";
 import {ParserFactory} from "./ParserFactory";
-import {AssignmentExpr, BinaryExpr, GroupingExpr, LiteralExpr, UnaryExpr} from "./ParserTypes";
+import {AssignmentExpr, BinaryExpr, FunctionStmt, GroupingExpr, LiteralExpr, UnaryExpr} from "./ParserTypes";
+
+
 
 describe("Parser tests", () => {
 
@@ -126,6 +128,20 @@ describe("Parser tests", () => {
     const statements = ParserFactory.getParser(tokens).parse()
     expect(statements[0]).toEqual(expectedStructure)
   })
+
+  // it("test should correctly parse function", () => {
+  //
+  //   const expectedStructure =
+  //     new FunctionStmt(
+  //       "a",
+  //       [],
+  //       new LiteralExpr("2")
+  //     )
+  //
+  //   const tokens = TokenizerFactory.getTokenizer("நிலையற்ற a = 2").getTokens()
+  //   const statements = ParserFactory.getParser(tokens).parse()
+  //   expect(statements[0]).toEqual(expectedStructure)
+  // })
 
 
 

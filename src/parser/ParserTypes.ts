@@ -44,3 +44,9 @@ export class AssignmentExpr implements Expr {
   constructor(public identifier: string, public type: TokenType.CONSTANT| TokenType.VARIABLE, public right: Expr) {
   }
 }
+
+export class FunctionStmt implements Statement {
+
+  constructor(public identifier:string, public parameters:string[], public body:Statement[] ) {
+  }
+}
