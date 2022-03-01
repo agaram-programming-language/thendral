@@ -40,6 +40,18 @@ export class TokenMapper {
         continue
       }
 
+
+      // allow alpha numeric characters.
+      if ( this.iterator.isAlphaNumeric(token) ) {
+        let keyword: string = token
+        while (! this.iterator.isAtEnd() && this.iterator.isAlphaNumeric(this.iterator.current()) ) {
+          keyword += this.iterator.consume()
+        }
+        this.addTokenWithValue(TokenType.IDENTIFIER, keyword)
+        continue
+      }
+
+
       switch (token) {
 
         case '+':
