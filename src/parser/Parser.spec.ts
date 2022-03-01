@@ -107,16 +107,16 @@ describe("Parser tests", () => {
     expect(statements[0]).toEqual(expectedStructure)
   });
 
-  // it("test should correctly parse variable assignment", () => {
-  //
-  //   const expectedStructure =
-  //     new AssignmentExpr("a", TokenType.CONSTANT, new LiteralExpr("2"))
-  //
-  //   const tokens = TokenizerFactory.getTokenizer("நிலையான a = 2").getTokens()
-  //   const statements = ParserFactory.getParser(tokens).parse()
-  //   expect(statements[0]).toEqual(expectedStructure)
-  //
-  // })
+  it("test should correctly parse variable assignment", () => {
+
+    const expectedStructure =
+      new AssignmentExpr("a", TokenType.CONSTANT, new LiteralExpr("2"))
+
+    const tokens = TokenizerFactory.getTokenizer("நிலையான a = 2").getTokens()
+    const statements = ParserFactory.getParser(tokens).parse()
+    expect(statements[0]).toEqual(expectedStructure)
+
+  })
 
 
 
