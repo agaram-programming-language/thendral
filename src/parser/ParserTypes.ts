@@ -41,6 +41,6 @@ export class LiteralExpr implements Expr {
 
 export class AssignmentExpr implements Expr {
 
-  constructor(public identifier: string, public type: TokenType.VARIABLE | TokenType.CONSTANT, public right: Expr) {
+  constructor(public identifier: string, public type: TokenType.CONSTANT| TokenType.VARIABLE, public right: Expr) {
   }
 }

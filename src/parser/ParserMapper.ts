@@ -1,5 +1,5 @@
 import {ParserIterator} from "./ParserIterator";
-import {BinaryExpr, Expr, GroupingExpr, LiteralExpr, Statement, UnaryExpr} from "./ParserTypes";
+import {AssignmentExpr, BinaryExpr, Expr, GroupingExpr, LiteralExpr, Statement, UnaryExpr} from "./ParserTypes";
 import {TokenType} from "../tokenizer/Tokenizer";
 
 export class ParserMapper {
@@ -18,7 +18,7 @@ export class ParserMapper {
 
   private startParsing() {
     while (!this.iterator.isAtEnd()) {
-      this.statements.push(this.expression())
+      this.statements.push(this.statement())
     }
   }
 
@@ -41,10 +41,9 @@ export class ParserMapper {
 
     if (this.iterator.match(TokenType.NUMBER)) {
       return new LiteralExpr(this.iterator.consume().value);
-    }
-    else if ( this.iterator.match(TokenType.OPEN_BRACKET) ) {
+    } else if (this.iterator.match(TokenType.OPEN_BRACKET)) {
       this.iterator.advanceIf(TokenType.OPEN_BRACKET)
-      const expr:Expr = this.expression();
+      const expr: Expr = this.expression();
       this.iterator.advanceIf(TokenType.CLOSE_BRACKET)
       return new GroupingExpr(expr)
     }
@@ -86,7 +85,7 @@ export class ParserMapper {
   }
 
   private or() {
-    let expr:Expr = this.and();
+    let expr: Expr = this.and();
     while (this.iterator.match(TokenType.LOGICAL_OR)) {
       expr = new BinaryExpr(expr, this.iterator.consume().type, this.and())
     }
@@ -94,10 +93,29 @@ export class ParserMapper {
   }
 
   private and() {
-    let expr:Expr = this.equality();
+    let expr: Expr = this.equality();
     while (this.iterator.match(TokenType.LOGICAL_AND)) {
       expr = new BinaryExpr(expr, this.iterator.consume().type, this.equality())
     }
     return expr
+  }
+
+  private statement() {
+
+    if (this.iterator.match(TokenType.CONSTANT)) {
+      const type: any = this.iterator.consumeIf(TokenType.CONSTANT, TokenType.VARIABLE).type
+      const identifier = this.iterator.consumeIf(TokenType.IDENTIFIER).value
+      // skip the equals sign
+      this.iterator.advanceIf(TokenType.EQUALS)
+
+      const expr = this.expression();
+      return new AssignmentExpr(
+        identifier,
+        type,
+        expr
+      )
+    }
+
+    return this.expression();
   }
 }

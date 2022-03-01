@@ -36,4 +36,17 @@ export class ParserIterator extends Iterator<Token> {
     }
     this.advance()
   }
+
+  consumeIf(...tokenTypes:TokenType[]) {
+    if ( this.isAtEnd() ) {
+      throw new Error("cant advance, reached EOF")
+    }
+    const token = this.unsafePeek();
+    for (let type of tokenTypes) {
+      if( this.check(type)) {
+        return this.consume();
+      }
+    }
+    throw new Error(`expected token types ${tokenTypes.join(",")} doesnt match ${token.type}`)
+  }
 }
