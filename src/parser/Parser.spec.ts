@@ -81,6 +81,19 @@ describe("Parser tests", () => {
     expect(statements[0]).toEqual(expectedStructure)
   });
 
+  it("Test should correctly parse or operator", () => {
+    const expectedStructure =
+      new BinaryExpr(
+        new LiteralExpr("2"),
+        TokenType.LOGICAL_OR,
+        new LiteralExpr("2")
+      )
+
+    const tokens = TokenizerFactory.getTokenizer("2 || 2").getTokens()
+    const statements = ParserFactory.getParser(tokens).parse()
+    expect(statements[0]).toEqual(expectedStructure)
+  });
+
 
 
 })

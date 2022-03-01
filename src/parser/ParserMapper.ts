@@ -23,7 +23,7 @@ export class ParserMapper {
   }
 
   private expression(): Expr {
-    return this.equality();
+    return this.or();
   }
 
   private unary(): Expr {
@@ -83,5 +83,13 @@ export class ParserMapper {
       unary = new BinaryExpr(unary, this.iterator.consume().type, this.unary())
     }
     return unary;
+  }
+
+  private or() {
+    let expr:Expr = this.equality();
+    while (this.iterator.match(TokenType.LOGICAL_OR)) {
+      expr = new BinaryExpr(expr, this.iterator.consume().type, this.equality())
+    }
+    return expr
   }
 }
