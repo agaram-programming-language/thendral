@@ -114,5 +114,19 @@ describe("Tokenizer Tests", () => {
       ])
   });
 
+  it('Test should identify english words as identifier', function () {
+    const tokens = TokenizerFactory.getTokenizer("a b c d e").getTokens()
+
+    expect(tokens.map(e => e.type)).toEqual(
+      [
+        TokenType.IDENTIFIER,
+        TokenType.IDENTIFIER,
+        TokenType.IDENTIFIER,
+        TokenType.IDENTIFIER,
+        TokenType.IDENTIFIER,
+        TokenType.EOF
+      ])
+  });
+
 
 })
