@@ -4,7 +4,7 @@ export interface Statement {
 
 }
 
-export interface Expr extends Statement{
+export interface Expr extends Statement {
 
 }
 
@@ -20,7 +20,7 @@ export class BinaryExpr implements Expr {
 
 export class GroupingExpr implements Expr {
 
-  constructor(public expr:Expr) {
+  constructor(public expr: Expr) {
   }
 
 }
@@ -33,7 +33,14 @@ export class UnaryExpr implements Expr {
 
 export class LiteralExpr implements Expr {
 
-    constructor(public value:any) {
-    }
+  constructor(public value: any) {
+  }
 
+}
+
+
+export class AssignmentExpr implements Expr {
+
+  constructor(public identifier: string, public type: TokenType.VARIABLE | TokenType.CONSTANT, public right: Expr) {
+  }
 }
