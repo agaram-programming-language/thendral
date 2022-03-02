@@ -45,12 +45,17 @@ export class AssignmentExpr implements Expr {
   }
 }
 
-export class IfStatement implements Statement {
-  constructor(public expr:Expr, public thenBranch:Statement, public elseIfBranches: ElseIfStatement[], public elseBranch?:Statement ) {
+export class IfStmt implements Statement {
+  constructor(public expr:Expr, public thenBranch:Statement, public elseIfBranches: ElseIfStmt[], public elseBranch?:Statement ) {
   }
 }
 
-export class ElseIfStatement implements Statement {
+export class WhileStmt implements Statement {
+  constructor(public expr:Expr, public statement:Statement ) {
+  }
+}
+
+export class ElseIfStmt implements Statement {
   constructor(public expr:Expr, public statement:Statement) {
   }
 }

@@ -3,10 +3,10 @@ import {
   AssignmentExpr,
   BinaryExpr,
   BlockStmt,
-  BooleanExpr, ElseIfStatement,
+  BooleanExpr, ElseIfStmt,
   Expr,
   GroupingExpr,
-  IfStatement,
+  IfStmt,
   LiteralExpr,
   Statement,
   UnaryExpr
@@ -140,7 +140,7 @@ export class ParserMapper {
     )
   }
 
-  private ifStatement(): IfStatement {
+  private ifStatement(): IfStmt {
     // consume the if token.
     this.iterator.advanceIf(TokenType.IF)
     // consume open bracket.
@@ -158,7 +158,7 @@ export class ParserMapper {
       this.iterator.advanceIf(TokenType.OPEN_BRACKET)
       const expression = this.expression()
       this.iterator.advanceIf(TokenType.CLOSE_BRACKET)
-      elseIfStatements.push(new ElseIfStatement(
+      elseIfStatements.push(new ElseIfStmt(
         expression,
         this.statement()
       ))
@@ -172,7 +172,7 @@ export class ParserMapper {
       elseBranch = this.statement();
     }
 
-    return new IfStatement(expr, thenBranch, elseIfStatements, elseBranch)
+    return new IfStmt(expr, thenBranch, elseIfStatements, elseBranch)
   }
 
   private blockStatement():Statement {
