@@ -38,6 +38,7 @@ export enum TokenType {
   ELSE_IF = 'ELSE_IF',
   FUNCTION = 'FUNCTION',
   COMMA = 'COMMA',
+  RETURN = 'RETURN',
 }
 
 
