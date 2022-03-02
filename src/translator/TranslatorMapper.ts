@@ -9,6 +9,16 @@ export class TranslatorMapper {
   }
 
   getTranslation():string[] {
+    this.startTranslation();
     return this.lines;
   }
+
+  private startTranslation() {
+    this.visitStatement();
+  }
+
+  private visitStatement() {
+
+  }
+
 }
