@@ -9,7 +9,7 @@ import {
   IfStmt,
   LiteralExpr,
   Statement,
-  UnaryExpr
+  UnaryExpr, WhileStmt
 } from "./ParserTypes";
 import {TokenType} from "../tokenizer/Tokenizer";
 
@@ -122,6 +122,9 @@ export class ParserMapper {
     } else if (this.iterator.match(TokenType.OPEN_BRACE)) {
       return this.blockStatement();
     }
+    else if ( this.iterator.match(TokenType.WHILE)) {
+      return this.whileStatement();
+    }
 
     return this.expression();
   }
@@ -189,6 +192,19 @@ export class ParserMapper {
     this.iterator.advanceIf(TokenType.CLOSE_BRACE)
 
     return new BlockStmt(statements);
+
+  }
+
+  private whileStatement():Statement {
+    // consume while.
+    this.iterator.advanceIf(TokenType.WHILE)
+    // consume open brace.
+    this.iterator.advanceIf(TokenType.OPEN_BRACKET)
+    const expression = this.expression();
+    this.iterator.advanceIf(TokenType.CLOSE_BRACKET)
+
+    // consume the loop body.
+    return new WhileStmt(expression, this.statement());
 
   }
 }
