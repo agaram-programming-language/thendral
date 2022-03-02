@@ -14,6 +14,18 @@ export class ParserIterator extends Iterator<Token> {
 
   }
 
+  matchAndAdvance(...tokenTypes:TokenType[]):boolean {
+
+    for (let type of tokenTypes) {
+      if( this.check(type)) {
+        this.advance()
+        return true;
+      }
+    }
+    return false;
+
+  }
+
   check(tokenType:TokenType):boolean {
     if ( this.isAtEnd() ) {
       return false;

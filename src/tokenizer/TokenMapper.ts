@@ -54,6 +54,10 @@ export class TokenMapper {
 
       switch (token) {
 
+        case ',':
+          this.addToken(TokenType.COMMA)
+          break
+
         case '+':
           this.addToken(TokenType.PLUS)
           break

@@ -3,13 +3,16 @@ import {
   AssignmentExpr,
   BinaryExpr,
   BlockStmt,
-  BooleanExpr, ElseIfStmt,
+  BooleanExpr,
+  ElseIfStmt,
   Expr,
+  FunctionStmt,
   GroupingExpr,
   IfStmt,
   LiteralExpr,
   Statement,
-  UnaryExpr, WhileStmt
+  UnaryExpr,
+  WhileStmt
 } from "./ParserTypes";
 import {TokenType} from "../tokenizer/Tokenizer";
 
@@ -61,7 +64,9 @@ export class ParserMapper {
       return new BooleanExpr(<any>this.iterator.consume().type)
     }
     // @TODO: cant parse primary.
-    throw new Error("cant parse primary expr")
+
+
+    throw new Error("cant parse primary expr " + JSON.stringify(this.iterator.unsafePeek()) )
   }
 
   private equality(): Expr {
@@ -124,6 +129,9 @@ export class ParserMapper {
     }
     else if ( this.iterator.match(TokenType.WHILE)) {
       return this.whileStatement();
+    }
+    else if ( this.iterator.match(TokenType.FUNCTION)) {
+      return this.functionStatement();
     }
 
     return this.expression();
@@ -206,5 +214,23 @@ export class ParserMapper {
     // consume the loop body.
     return new WhileStmt(expression, this.statement());
 
+  }
+
+  private functionStatement():Statement {
+    // consume function.
+    this.iterator.advanceIf(TokenType.FUNCTION)
+    const functionName = this.iterator.consumeIf(TokenType.IDENTIFIER).value
+    const identifiers:string[] = []
+    this.iterator.advanceIf(TokenType.OPEN_BRACKET)
+
+    if ( ! this.iterator.match(TokenType.CLOSE_BRACKET) ) {
+      do {
+        identifiers.push(this.iterator.consumeIf(TokenType.IDENTIFIER).value)
+      } while (this.iterator.matchAndAdvance(TokenType.COMMA))
+    }
+    this.iterator.advanceIf(TokenType.CLOSE_BRACKET)
+    const body = this.statement();
+
+    return new FunctionStmt(functionName, identifiers, body)
   }
 }
