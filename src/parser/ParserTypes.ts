@@ -67,7 +67,7 @@ export class BlockStmt implements Statement {
 
 export class FunctionStmt implements Statement {
 
-  constructor(public identifier:string, public parameters:string[], public body:Statement[] ) {
+  constructor(public identifier:string, public parameters:Expr[], public body:Statement[] ) {
   }
 }
 

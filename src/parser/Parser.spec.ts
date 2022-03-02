@@ -209,20 +209,19 @@ describe("Parser tests", () => {
     expect(statements[0]).toEqual(expectedStructure)
   })
 
+  it("test should correctly parse function", () => {
 
-  // it("test should correctly parse function", () => {
-  //
-  //   const expectedStructure =
-  //     new FunctionStmt(
-  //       "a",
-  //       [],
-  //       new LiteralExpr("2")
-  //     )
-  //
-  //   const tokens = TokenizerFactory.getTokenizer("நிலையற்ற a = 2").getTokens()
-  //   const statements = ParserFactory.getParser(tokens).parse()
-  //   expect(statements[0]).toEqual(expectedStructure)
-  // })
+    const expectedStructure =
+      new WhileStmt(
+        new BooleanExpr(TokenType.TRUE),
+        new BlockStmt([]),
+      )
+
+    const tokens = TokenizerFactory.getTokenizer("இருப்பின்வளையம்(சரி) { }").getTokens()
+    const statements = ParserFactory.getParser(tokens).parse()
+    expect(statements[0]).toEqual(expectedStructure)
+  })
+
 
 
 })
