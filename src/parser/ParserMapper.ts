@@ -1,7 +1,8 @@
 import {ParserIterator} from "./ParserIterator";
 import {
   AssignmentExpr,
-  BinaryExpr, BlockStmt,
+  BinaryExpr,
+  BlockStmt,
   BooleanExpr,
   Expr,
   GroupingExpr,
@@ -150,7 +151,15 @@ export class ParserMapper {
     // consume then branch
     const thenBranch = this.statement()
 
-    return new IfStatement(expr, thenBranch, [])
+    let elseBranch = undefined;
+
+    if ( this.iterator.match(TokenType.ELSE) ) {
+      // if else branch exists, then consume it.
+      this.iterator.advance() // consume ELSE token
+      elseBranch = this.statement();
+    }
+
+    return new IfStatement(expr, thenBranch, [], elseBranch)
   }
 
   private blockStatement():Statement {
