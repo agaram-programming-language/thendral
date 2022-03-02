@@ -45,6 +45,16 @@ export class AssignmentExpr implements Expr {
   }
 }
 
+export class IfStatement implements Statement {
+  constructor(public expr:Expr, public thenBranch:Statement, public elseIfBranches: IfStatement[], public elseBranch?:Statement ) {
+  }
+}
+
+export class BlockStmt implements Statement {
+  constructor(public statements: Statement[]) {
+  }
+}
+
 export class FunctionStmt implements Statement {
 
   constructor(public identifier:string, public parameters:string[], public body:Statement[] ) {
