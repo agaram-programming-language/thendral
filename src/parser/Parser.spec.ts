@@ -3,7 +3,7 @@ import {ParserFactory} from "./ParserFactory";
 import {
   AssignmentExpr,
   BinaryExpr, BlockStmt,
-  BooleanExpr, ElseIfStmt,
+  BooleanExpr, ElseIfStmt, FunctionStmt,
   GroupingExpr,
   IfStmt,
   LiteralExpr,
@@ -209,20 +209,19 @@ describe("Parser tests", () => {
     expect(statements[0]).toEqual(expectedStructure)
   })
 
-  // it("test should correctly parse function", () => {
-  //
-  //   const expectedStructure =
-  //     new WhileStmt(
-  //       new BooleanExpr(TokenType.TRUE),
-  //       new BlockStmt([]),
-  //     )
-  //
-  //   const tokens = TokenizerFactory.getTokenizer("இருப்பின்வளையம்(சரி) { }").getTokens()
-  //   const statements = ParserFactory.getParser(tokens).parse()
-  //   expect(statements[0]).toEqual(expectedStructure)
-  // })
-  //
-  //
+  it("test should correctly parse function", () => {
+
+    const expectedStructure =
+      new FunctionStmt(
+        'கூட்டல்',
+        ['a', 'ச'],
+        new BlockStmt([])
+      )
+
+    const tokens = TokenizerFactory.getTokenizer("செயல்பாடு கூட்டல்(a,ச) { }").getTokens()
+    const statements = ParserFactory.getParser(tokens).parse()
+    expect(statements[0]).toEqual(expectedStructure)
+  })
 
 
 })
