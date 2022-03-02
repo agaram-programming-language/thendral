@@ -173,7 +173,7 @@ export class TokenMapper {
       'நிலையற்ற' : TokenType.VARIABLE,
       'நிலையான' : TokenType.CONSTANT,
       'ஒருவேளை' : TokenType.IF,
-      'இல்லையென்றால்' : TokenType.ELSE,
+      'எதுவும்இல்லையென்றால்' : TokenType.ELSE,
       'இருப்பின்வளையம்' : TokenType.WHILE,
       'சரி' : TokenType.TRUE,
       'தவறு' : TokenType.FALSE,

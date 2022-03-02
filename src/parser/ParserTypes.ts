@@ -46,7 +46,12 @@ export class AssignmentExpr implements Expr {
 }
 
 export class IfStatement implements Statement {
-  constructor(public expr:Expr, public thenBranch:Statement, public elseIfBranches: IfStatement[], public elseBranch?:Statement ) {
+  constructor(public expr:Expr, public thenBranch:Statement, public elseIfBranches: ElseIfStatement[], public elseBranch?:Statement ) {
+  }
+}
+
+export class ElseIfStatement implements Statement {
+  constructor(public expr:Expr, public statement:Statement) {
   }
 }
 
