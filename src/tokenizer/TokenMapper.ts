@@ -178,7 +178,8 @@ export class TokenMapper {
       'சரி' : TokenType.TRUE,
       'தவறு' : TokenType.FALSE,
       'ஆகவளையம்' : TokenType.FOR,
-      'இல்லையென்றால்': TokenType.ELSE_IF
+      'இல்லையென்றால்': TokenType.ELSE_IF,
+      'செயல்பாடு' : TokenType.FUNCTION
     }
     return keywordMap[keyword] ? keywordMap[keyword] : TokenType.IDENTIFIER
   }
