@@ -224,16 +224,12 @@ describe("Parser tests", () => {
   })
 
 
-  it("test should parse function call correctly", () => {
+  it("test should concatnate strings", () => {
 
     const expectedStructure =
-      new FunctionStmt(
-        'கூட்டல்',
-        ['a', 'ச'],
-        new BlockStmt([])
-      )
+      new AssignmentExpr("a", TokenType.VARIABLE, new LiteralExpr("2"))
 
-    const tokens = TokenizerFactory.getTokenizer("கூட்டல்(a,ச)").getTokens()
+    const tokens = TokenizerFactory.getTokenizer("நிலையற்ற a = '2'").getTokens()
     const statements = ParserFactory.getParser(tokens).parse()
     expect(statements[0]).toEqual(expectedStructure)
   })
