@@ -3,7 +3,7 @@ import {
   AssignmentExpr,
   BinaryExpr,
   BlockStmt,
-  BooleanExpr,
+  BooleanExpr, ElseIfStatement,
   Expr,
   GroupingExpr,
   IfStatement,
@@ -151,9 +151,18 @@ export class ParserMapper {
     // consume then branch
     const thenBranch = this.statement()
 
-    // while (! this.iterator.isAtEnd() && this.iterator.match(TokenType.ELSE_IF)) {
-    //
-    // }
+    const elseIfStatements = []
+    while (! this.iterator.isAtEnd() && this.iterator.match(TokenType.ELSE_IF)) {
+      // consume else if tokens.
+      this.iterator.advance();
+      this.iterator.advanceIf(TokenType.OPEN_BRACKET)
+      const expression = this.expression()
+      this.iterator.advanceIf(TokenType.CLOSE_BRACKET)
+      elseIfStatements.push(new ElseIfStatement(
+        expression,
+        this.statement()
+      ))
+    }
 
     let elseBranch = undefined;
 
@@ -163,7 +172,7 @@ export class ParserMapper {
       elseBranch = this.statement();
     }
 
-    return new IfStatement(expr, thenBranch, [], elseBranch)
+    return new IfStatement(expr, thenBranch, elseIfStatements, elseBranch)
   }
 
   private blockStatement():Statement {
