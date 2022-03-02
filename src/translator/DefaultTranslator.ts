@@ -11,7 +11,7 @@ export class DefaultTranslator implements Translator {
     this.translatorMapper = new TranslatorMapper(new TranslatorIterator(statements))
   }
 
-  getTranslation(): string[] {
+  translate(): string[] {
     return this.translatorMapper.getTranslation();
   }
 

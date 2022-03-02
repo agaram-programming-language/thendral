@@ -3,7 +3,9 @@ import {DefaultTranslator} from "./DefaultTranslator";
 
 export interface Translator {
 
-  getTranslation(): string[]
+  translate(): string[]
+
+
 }
 
 export class TranslatorFactory {
