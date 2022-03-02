@@ -4,14 +4,17 @@ import {
   BinaryExpr,
   BlockStmt,
   BooleanExpr,
+  CallExpr,
   ElseIfStmt,
   Expr,
   FunctionStmt,
   GroupingExpr,
   IfStmt,
-  LiteralExpr, NumericalExpr,
+  LiteralExpr,
+  NumericalExpr,
   Statement,
   UnaryExpr,
+  IdentifierExpr,
   WhileStmt
 } from "./ParserTypes";
 import {TokenType} from "../tokenizer/Tokenizer";
@@ -48,7 +51,7 @@ export class ParserMapper {
         this.unary()
       )
     }
-    return this.primary()
+    return this.call()
   }
 
   private primary(): Statement {
@@ -66,6 +69,9 @@ export class ParserMapper {
       return new GroupingExpr(expr)
     } else if (this.iterator.match(TokenType.TRUE, TokenType.FALSE)) {
       return new BooleanExpr(<any>this.iterator.consume().type)
+    }
+    else if ( this.iterator.match(TokenType.IDENTIFIER)) {
+      return new IdentifierExpr(this.iterator.consume().value)
     }
     // @TODO: cant parse primary.
 
@@ -236,5 +242,25 @@ export class ParserMapper {
     const body = this.statement();
 
     return new FunctionStmt(functionName, identifiers, body)
+  }
+
+  private call():Expr {
+    const expr:Expr = this.primary();
+
+    if (! this.iterator.match(TokenType.OPEN_BRACKET) ) {
+      return expr;
+    }
+    this.iterator.advanceIf(TokenType.OPEN_BRACKET)
+    const args:Expr[] = []
+    if ( ! this.iterator.match(TokenType.CLOSE_BRACKET) ) {
+      do {
+        args.push(this.expression())
+      } while (this.iterator.matchAndAdvance(TokenType.COMMA))
+    }
+
+    this.iterator.advanceIf(TokenType.CLOSE_BRACKET)
+
+    return new CallExpr(expr, args)
+
   }
 }

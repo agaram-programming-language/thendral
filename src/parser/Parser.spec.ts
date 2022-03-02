@@ -3,8 +3,8 @@ import {ParserFactory} from "./ParserFactory";
 import {
   AssignmentExpr,
   BinaryExpr, BlockStmt,
-  BooleanExpr, ElseIfStmt, FunctionStmt,
-  GroupingExpr,
+  BooleanExpr, CallExpr, ElseIfStmt, FunctionStmt,
+  GroupingExpr, IdentifierExpr,
   IfStmt,
   LiteralExpr, NumericalExpr,
   UnaryExpr, WhileStmt
@@ -240,7 +240,7 @@ describe("Parser tests", () => {
 
     const expectedStructure =
       new CallExpr(
-        "கூட்டல்",
+        new IdentifierExpr("கூட்டல்" ),
         [ new IdentifierExpr("a"), new IdentifierExpr("ச")]
       )
 

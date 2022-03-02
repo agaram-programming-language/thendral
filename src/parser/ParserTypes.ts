@@ -38,6 +38,18 @@ export class LiteralExpr implements Expr {
 
 }
 
+export class CallExpr implements Expr {
+  constructor(public functionName:Expr, public args:Expr[]) {
+  }
+
+}
+
+export class IdentifierExpr implements Expr {
+  constructor(public identifier:string) {
+  }
+
+}
+
 export class NumericalExpr implements Expr {
 
   constructor(public value: number) {
