@@ -84,6 +84,11 @@ export class BlockStmt implements Statement {
   }
 }
 
+export class ReturnStmt implements Statement {
+  constructor(public expr: Expr) {
+  }
+}
+
 export class FunctionStmt implements Statement {
 
   constructor(public identifier:string, public parameters:string[], public body:Statement ) {

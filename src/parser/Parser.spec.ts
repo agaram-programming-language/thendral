@@ -6,7 +6,7 @@ import {
   BooleanExpr, CallExpr, ElseIfStmt, FunctionStmt,
   GroupingExpr, IdentifierExpr,
   IfStmt,
-  LiteralExpr, NumericalExpr,
+  LiteralExpr, NumericalExpr, ReturnStmt,
   UnaryExpr, WhileStmt
 } from "./ParserTypes";
 
@@ -245,6 +245,18 @@ describe("Parser tests", () => {
       )
 
     const tokens = TokenizerFactory.getTokenizer("கூட்டல்(a,ச)").getTokens()
+    const statements = ParserFactory.getParser(tokens).parse()
+    expect(statements[0]).toEqual(expectedStructure)
+  })
+
+  it("test should correctly parse return statement", () => {
+
+    const expectedStructure =
+      new ReturnStmt(
+        new NumericalExpr(2)
+      )
+
+    const tokens = TokenizerFactory.getTokenizer("திருப்பு 2").getTokens()
     const statements = ParserFactory.getParser(tokens).parse()
     expect(statements[0]).toEqual(expectedStructure)
   })

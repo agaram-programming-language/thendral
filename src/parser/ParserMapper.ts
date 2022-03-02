@@ -9,12 +9,12 @@ import {
   Expr,
   FunctionStmt,
   GroupingExpr,
+  IdentifierExpr,
   IfStmt,
   LiteralExpr,
-  NumericalExpr,
+  NumericalExpr, ReturnStmt,
   Statement,
   UnaryExpr,
-  IdentifierExpr,
   WhileStmt
 } from "./ParserTypes";
 import {TokenType} from "../tokenizer/Tokenizer";
@@ -143,6 +143,9 @@ export class ParserMapper {
     else if ( this.iterator.match(TokenType.FUNCTION)) {
       return this.functionStatement();
     }
+    else if ( this.iterator.match(TokenType.RETURN)) {
+      return this.returnStatement();
+    }
 
     return this.expression();
   }
@@ -262,5 +265,10 @@ export class ParserMapper {
 
     return new CallExpr(expr, args)
 
+  }
+
+  private returnStatement():Statement {
+    this.iterator.advanceIf(TokenType.RETURN);
+    return new ReturnStmt( this.expression() );
   }
 }
