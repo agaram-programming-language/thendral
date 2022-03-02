@@ -9,7 +9,7 @@ import {
   FunctionStmt,
   GroupingExpr,
   IfStmt,
-  LiteralExpr,
+  LiteralExpr, NumericalExpr,
   Statement,
   UnaryExpr,
   WhileStmt
@@ -54,7 +54,7 @@ export class ParserMapper {
   private primary(): Statement {
 
     if (this.iterator.match(TokenType.NUMBER)) {
-      return new LiteralExpr(this.iterator.consume().value);
+      return new NumericalExpr(parseInt(this.iterator.consume().value));
     } else if (this.iterator.match(TokenType.OPEN_BRACKET)) {
       this.iterator.advanceIf(TokenType.OPEN_BRACKET)
       const expr: Expr = this.expression();

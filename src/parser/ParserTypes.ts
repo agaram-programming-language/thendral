@@ -38,6 +38,13 @@ export class LiteralExpr implements Expr {
 
 }
 
+export class NumericalExpr implements Expr {
+
+  constructor(public value: number) {
+  }
+
+}
+
 
 export class AssignmentExpr implements Expr {
 
