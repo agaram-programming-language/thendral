@@ -5,6 +5,7 @@ import {
   BooleanExpr,
   Expr,
   GroupingExpr,
+  IfStatement,
   LiteralExpr,
   Statement,
   UnaryExpr
@@ -117,6 +118,9 @@ export class ParserMapper {
     if (this.iterator.match(TokenType.CONSTANT, TokenType.VARIABLE)) {
       return this.variableStatement();
     }
+    else if ( this.iterator.match(TokenType.IF ) ) {
+      return this.ifStatement();
+    }
 
     return this.expression();
   }
@@ -133,5 +137,19 @@ export class ParserMapper {
       type,
       expr
     )
+  }
+
+  private ifStatement(): IfStatement {
+    // consume the if token.
+    this.iterator.advanceIf(TokenType.IF)
+    // consume open bracket.
+    this.iterator.advanceIf(TokenType.OPEN_BRACKET)
+    const expr = this.expression();
+    // consume close bracket.
+    this.iterator.advanceIf(TokenType.CLOSE_BRACKET)
+    // consume then branch
+    const thenBranch = this.statement()
+
+    return new IfStatement(expr, thenBranch, [])
   }
 }
