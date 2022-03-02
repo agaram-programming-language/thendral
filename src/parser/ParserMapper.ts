@@ -1,7 +1,7 @@
 import {ParserIterator} from "./ParserIterator";
 import {
   AssignmentExpr,
-  BinaryExpr,
+  BinaryExpr, BlockStmt,
   BooleanExpr,
   Expr,
   GroupingExpr,
@@ -56,8 +56,7 @@ export class ParserMapper {
       const expr: Expr = this.expression();
       this.iterator.advanceIf(TokenType.CLOSE_BRACKET)
       return new GroupingExpr(expr)
-    }
-    else if ( this.iterator.match(TokenType.TRUE, TokenType.FALSE) ) {
+    } else if (this.iterator.match(TokenType.TRUE, TokenType.FALSE)) {
       return new BooleanExpr(<any>this.iterator.consume().type)
     }
     // @TODO: cant parse primary.
@@ -113,13 +112,14 @@ export class ParserMapper {
     return expr
   }
 
-  private statement() {
+  private statement():Statement {
 
     if (this.iterator.match(TokenType.CONSTANT, TokenType.VARIABLE)) {
       return this.variableStatement();
-    }
-    else if ( this.iterator.match(TokenType.IF ) ) {
+    } else if (this.iterator.match(TokenType.IF)) {
       return this.ifStatement();
+    } else if (this.iterator.match(TokenType.OPEN_BRACE)) {
+      return this.blockStatement();
     }
 
     return this.expression();
@@ -151,5 +151,22 @@ export class ParserMapper {
     const thenBranch = this.statement()
 
     return new IfStatement(expr, thenBranch, [])
+  }
+
+  private blockStatement():Statement {
+    // consume open brace.
+    this.iterator.advanceIf(TokenType.OPEN_BRACE)
+
+    const statements: Statement[] = []
+
+    while ((!this.iterator.isAtEnd() && !this.iterator.match(TokenType.CLOSE_BRACE))) {
+      statements.push(this.statement())
+    }
+
+    // consume close brace.
+    this.iterator.advanceIf(TokenType.CLOSE_BRACE)
+
+    return new BlockStmt(statements);
+
   }
 }
