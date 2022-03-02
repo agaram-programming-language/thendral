@@ -35,6 +35,7 @@ export enum TokenType {
   EOF = 'EOF',
   NOT_EQUALS = 'NOT_EQUALS',
   NOT = 'NOT',
+  ELSE_IF = 'ELSE_IF',
 }
 
 

@@ -180,20 +180,20 @@ describe("Parser tests", () => {
     expect(statements[0]).toEqual(expectedStructure)
   })
 
-  it("test should correctly parse if elseif else loop", () => {
-
-    const expectedStructure =
-      new IfStatement(
-        new BooleanExpr(TokenType.TRUE),
-        new BlockStmt([]),
-        [new ElseIfStatement(new BooleanExpr(TokenType.TRUE), new BlockStmt([]))],
-        new BlockStmt([])
-      )
-
-    const tokens = TokenizerFactory.getTokenizer("ஒருவேளை( சரி ) { } இல்லையென்றால்(சரி) { } எதுவும்இல்லையென்றால் {}").getTokens()
-    const statements = ParserFactory.getParser(tokens).parse()
-    expect(statements[0]).toEqual(expectedStructure)
-  })
+  // it("test should correctly parse if elseif else loop", () => {
+  //
+  //   const expectedStructure =
+  //     new IfStatement(
+  //       new BooleanExpr(TokenType.TRUE),
+  //       new BlockStmt([]),
+  //       [new ElseIfStatement(new BooleanExpr(TokenType.TRUE), new BlockStmt([]))],
+  //       new BlockStmt([])
+  //     )
+  //
+  //   const tokens = TokenizerFactory.getTokenizer("ஒருவேளை( சரி ) { } இல்லையென்றால்(சரி) { } எதுவும்இல்லையென்றால் {}").getTokens()
+  //   const statements = ParserFactory.getParser(tokens).parse()
+  //   expect(statements[0]).toEqual(expectedStructure)
+  // })
 
 
   // it("test should correctly parse function", () => {

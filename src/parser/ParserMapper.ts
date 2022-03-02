@@ -151,6 +151,10 @@ export class ParserMapper {
     // consume then branch
     const thenBranch = this.statement()
 
+    // while (! this.iterator.isAtEnd() && this.iterator.match(TokenType.ELSE_IF)) {
+    //
+    // }
+
     let elseBranch = undefined;
 
     if ( this.iterator.match(TokenType.ELSE) ) {
