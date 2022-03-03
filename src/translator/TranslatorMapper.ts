@@ -23,11 +23,16 @@ export class TranslatorMapper {
     while ( ! this.iterator.isAtEnd() ) {
       const statement = this.iterator.consume()
       if ( statement instanceof AssignmentExpr ) {
-        const assignmentType = statement.type === TokenType.CONSTANT ? 'const' : 'var'
-        const expr = this.visitExpression(statement.right);
-        this.add(`${assignmentType} ${statement.identifier} = ${expr}`)
+        this.visitAssignmentExpr(statement);
       }
+
     }
+  }
+
+  private visitAssignmentExpr(statement: AssignmentExpr) {
+    const assignmentType = statement.type === TokenType.CONSTANT ? 'const' : 'var'
+    const expr = this.visitExpression(statement.right);
+    this.add(`${assignmentType} ${statement.identifier} = ${expr}`)
   }
 
   private add(s: string) {

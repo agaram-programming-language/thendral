@@ -18,4 +18,18 @@ describe("Translator Tests", () => {
 
   });
 
+  it("Test should translate if loop correctly", () => {
+
+    const tokens = TokenizerFactory.getTokenizer("ஒருவேளை(a == 2){}").getTokens()
+    const statements = ParserFactory.getParser(tokens).parse();
+    const translation = TranslatorFactory.getTranslator(statements).translate();
+
+    expect(translation).toEqual(
+      [
+        "if ( a == 2 ) { }"
+      ])
+
+  });
+
+
 })
