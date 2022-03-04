@@ -78,6 +78,9 @@ export class TranslatorMapper {
     else if ( expr instanceof IdentifierExpr ) {
       return this.visitIdentifierExpr(expr);
     }
+    else if (expr instanceof UnaryExpr) {
+      return this.visitUnaryExpr(expr)
+    }
   }
 
   private visitBinaryExpr(e: BinaryExpr):string {
@@ -92,7 +95,7 @@ export class TranslatorMapper {
   }
 
   private visitUnaryExpr(e: UnaryExpr) {
-    throw new Error("not implemented")
+    return `${this.iterator.translateTokenType(e.operator)}${this.visitExpression(e.right)}`
   }
 
   private visitLiteralExpr(e: LiteralExpr): string {
