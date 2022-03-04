@@ -26,7 +26,7 @@ describe("Translator Tests", () => {
 
     expect(translation).toEqual(
       [
-        "if ( a == 2 ) { }"
+        "if ( a == 2 ) {}"
       ])
 
   });
