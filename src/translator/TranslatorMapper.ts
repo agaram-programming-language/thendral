@@ -144,7 +144,7 @@ export class TranslatorMapper {
   }
 
   private visitFunctionStmt(e: FunctionStmt) {
-    throw new Error("not implemented")
+      return `function ${e.identifier} (${e.parameters.join(",")}) {${this.visitStatement(e.body)}}`
   }
 
   private visitBooleanExpr(e: BooleanExpr) {
