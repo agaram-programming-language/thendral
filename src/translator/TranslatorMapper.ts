@@ -81,6 +81,12 @@ export class TranslatorMapper {
     else if (expr instanceof UnaryExpr) {
       return this.visitUnaryExpr(expr)
     }
+    else if ( expr instanceof  BooleanExpr ) {
+      return this.visitBooleanExpr(expr)
+    }
+    else if (expr instanceof CallExpr ){
+      return this.visitCallExpr(expr)
+    }
   }
 
   private visitBinaryExpr(e: BinaryExpr):string {
@@ -102,8 +108,10 @@ export class TranslatorMapper {
     return `'${e.value}'`;
   }
 
-  private visitCallExpr(e: CallExpr) {
-    throw new Error("not implemented")
+  private visitCallExpr(e: CallExpr):string {
+    const args = e.args.map(el => this.visitExpression(el))
+      .join(",")
+    return `${this.visitExpression(e.functionName)}(${args})`
   }
 
   private visitIdentifierExpr(e: IdentifierExpr):string {

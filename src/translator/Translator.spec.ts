@@ -58,6 +58,33 @@ describe("Translator Tests", () => {
 
   });
 
+  it("Test should translate unary expression correctly", () => {
+
+    const tokens = TokenizerFactory.getTokenizer("நிலையான a = சரி").getTokens()
+    const statements = ParserFactory.getParser(tokens).parse();
+    const translation = TranslatorFactory.getTranslator(statements).translate();
+
+    expect(translation).toEqual(
+      [
+        "const a = true"
+      ])
+
+  });
+
+
+  it("Test should translate call expression correctly", () => {
+
+    const tokens = TokenizerFactory.getTokenizer("கூட்டல்(a,ச)").getTokens()
+    const statements = ParserFactory.getParser(tokens).parse();
+    const translation = TranslatorFactory.getTranslator(statements).translate();
+
+    expect(translation).toEqual(
+      [
+        "கூட்டல்(a,ச)"
+      ])
+
+  });
+
 
 
 })
