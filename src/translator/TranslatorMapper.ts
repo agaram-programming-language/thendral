@@ -56,6 +56,9 @@ export class TranslatorMapper {
     else if (stmt instanceof BlockStmt) {
       return this.visitBlockStmt(stmt)
     }
+    else if ( stmt instanceof FunctionStmt ){
+      return this.visitFunctionStmt(stmt)
+    }
 
     return this.visitExpression(stmt);
   }

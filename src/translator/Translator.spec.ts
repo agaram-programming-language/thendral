@@ -40,7 +40,7 @@ describe("Translator Tests", () => {
 
     expect(translation).toEqual(
       [
-        "function (a,ச) {}"
+        "function கூட்டல் (a,ச) {}"
       ])
 
   });
