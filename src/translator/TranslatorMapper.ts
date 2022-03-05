@@ -12,7 +12,7 @@ import {
   IdentifierExpr,
   IfStmt,
   LiteralExpr,
-  NumericalExpr,
+  NumericalExpr, PrintStmt,
   ReturnStmt,
   Statement,
   UnaryExpr,
@@ -65,6 +65,9 @@ export class TranslatorMapper {
     }
     else if  (stmt instanceof WhileStmt ) {
       return this.visitWhileStmt(stmt);
+    }
+    else if ( stmt instanceof PrintStmt ) {
+      return this.visitPrintStmt(stmt)
     }
 
     return this.visitExpression(stmt);
@@ -168,6 +171,10 @@ export class TranslatorMapper {
 
   private visitElseIfStmt(e: ElseIfStmt) {
     return `elseif ( ${this.visitExpression(e.expr)} ) ${this.visitStatement(e.statement)}`
+  }
+
+  private visitPrintStmt(e:PrintStmt) {
+    return `document.write( ${this.visitExpression(e.expr)} )`
   }
 
   private visitBlockStmt(e: BlockStmt) {

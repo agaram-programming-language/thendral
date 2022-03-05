@@ -149,6 +149,19 @@ describe("Translator Tests", () => {
   });
 
 
+  it("Test should translate print statement correctly", () => {
+
+    const tokens = TokenizerFactory.getTokenizer("எழுது 2").getTokens()
+    const statements = ParserFactory.getParser(tokens).parse();
+    const translation = TranslatorFactory.getTranslator(statements).translate();
+
+    expect(translation).toEqual(
+      [
+        "document.write( 2 )"
+      ])
+  });
+
+
 
 
 })
