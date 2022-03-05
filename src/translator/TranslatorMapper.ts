@@ -62,6 +62,9 @@ export class TranslatorMapper {
     else if ( stmt instanceof ReturnStmt ) {
       return this.visitReturnStmt(stmt)
     }
+    else if  (stmt instanceof WhileStmt ) {
+      return this.visitWhileStmt(stmt);
+    }
 
     return this.visitExpression(stmt);
   }
@@ -142,7 +145,7 @@ export class TranslatorMapper {
   }
 
   private visitWhileStmt(e: WhileStmt) {
-    throw new Error("not implemented")
+    return `while ( ${this.visitExpression(e)} ) { ${this.visitStatement(e.statement)} }`
   }
 
   private visitElseIfStmt(e: ElseIfStmt) {
