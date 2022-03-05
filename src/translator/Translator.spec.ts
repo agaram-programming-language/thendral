@@ -110,6 +110,19 @@ describe("Translator Tests", () => {
       ])
   });
 
+  it("Test should while loop correctly", () => {
+
+    const tokens = TokenizerFactory.getTokenizer("இருப்பின்வளையம்(a > 20){}").getTokens()
+    const statements = ParserFactory.getParser(tokens).parse();
+    const translation = TranslatorFactory.getTranslator(statements).translate();
+
+    expect(translation).toEqual(
+      [
+        "while ( a > 20 ) { }"
+      ])
+  });
+
+
 
 
 })
