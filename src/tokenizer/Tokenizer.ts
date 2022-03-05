@@ -39,6 +39,7 @@ export enum TokenType {
   FUNCTION = 'FUNCTION',
   COMMA = 'COMMA',
   RETURN = 'RETURN',
+  PRINT = 'PRINT',
 }
 
 
