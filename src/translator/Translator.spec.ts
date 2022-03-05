@@ -136,5 +136,19 @@ describe("Translator Tests", () => {
 
 
 
+  it("Test should translate if loop with else if branches correctly", () => {
+
+    const tokens = TokenizerFactory.getTokenizer("ஒருவேளை(a == 2){} இல்லையென்றால்(b==2){} எதுவும்இல்லையென்றால்{}").getTokens()
+    const statements = ParserFactory.getParser(tokens).parse();
+    const translation = TranslatorFactory.getTranslator(statements).translate();
+
+    expect(translation).toEqual(
+      [
+        "if ( a == 2 ) {}\nelseif ( b == 2 ) {}\nelse {}"
+      ])
+  });
+
+
+
 
 })

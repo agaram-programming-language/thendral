@@ -147,6 +147,18 @@ export class TranslatorMapper {
 
     const expr = this.visitExpression(e.expr)
     const thenBranch = this.visitStatement(e.thenBranch)
+    let parts = '';
+    if ( e.elseIfBranches.length !== 0 ) {
+      parts += e.elseIfBranches.map(elseIfBranch => this.visitElseIfStmt(elseIfBranch)).join("\n")
+    }
+    if ( e.elseBranch !== undefined ) {
+      parts += `\nelse ${this.visitStatement(e.elseBranch)}`
+    }
+
+    if ( parts !== '') {
+      return `if ( ${expr} ) ${thenBranch}\n` + parts
+    }
+
     return `if ( ${expr} ) ${thenBranch}`
   }
 
@@ -155,7 +167,7 @@ export class TranslatorMapper {
   }
 
   private visitElseIfStmt(e: ElseIfStmt) {
-    throw new Error("not implemented")
+    return `elseif ( ${this.visitExpression(e.expr)} ) ${this.visitStatement(e.statement)}`
   }
 
   private visitBlockStmt(e: BlockStmt) {
