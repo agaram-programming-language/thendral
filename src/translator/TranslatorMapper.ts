@@ -145,7 +145,7 @@ export class TranslatorMapper {
   }
 
   private visitWhileStmt(e: WhileStmt) {
-    return `while ( ${this.visitExpression(e)} ) { ${this.visitStatement(e.statement)} }`
+    return `while ( ${this.visitExpression(e.expr)} ) {${this.visitStatement(e.statement)}}`
   }
 
   private visitElseIfStmt(e: ElseIfStmt) {
