@@ -160,7 +160,7 @@ export class TranslatorMapper {
   }
 
   private visitReturnStmt(e: ReturnStmt) {
-    throw new Error("not implemented")
+    return `return ${this.visitExpression(e.expr)}`
   }
 
   private visitFunctionStmt(e: FunctionStmt) {
