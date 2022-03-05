@@ -12,7 +12,7 @@ import {
   IdentifierExpr,
   IfStmt,
   LiteralExpr,
-  NumericalExpr,
+  NumericalExpr, PrintStmt,
   ReturnStmt,
   Statement,
   UnaryExpr,
@@ -136,6 +136,9 @@ export class ParserMapper {
     }
     else if (this.iterator.match(TokenType.IDENTIFIER) && this.iterator.matchNext(TokenType.EQUALS)) {
       return this.assignmentStatement();
+    }
+    else if ( this.iterator.match(TokenType.PRINT)) {
+      return this.printStatement();
     }
     else if (this.iterator.match(TokenType.IF)) {
       return this.ifStatement();
@@ -289,5 +292,11 @@ export class ParserMapper {
       TokenType.IDENTIFIER,
       expr
     )
+  }
+
+  private printStatement() {
+    // consume print token.
+    this.iterator.advanceIf(TokenType.PRINT)
+    return new PrintStmt(this.expression())
   }
 }
