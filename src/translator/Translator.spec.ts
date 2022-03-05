@@ -95,7 +95,19 @@ describe("Translator Tests", () => {
       [
         "( 1 + 1 )"
       ])
+  });
 
+
+  it("Test should translate return statement correctly", () => {
+
+    const tokens = TokenizerFactory.getTokenizer("திருப்பு 2").getTokens()
+    const statements = ParserFactory.getParser(tokens).parse();
+    const translation = TranslatorFactory.getTranslator(statements).translate();
+
+    expect(translation).toEqual(
+      [
+        "return 2"
+      ])
   });
 
 
