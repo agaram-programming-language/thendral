@@ -122,6 +122,18 @@ describe("Translator Tests", () => {
       ])
   });
 
+  it("Test should translate block statement correctly", () => {
+
+    const tokens = TokenizerFactory.getTokenizer("{ a=a+2 }").getTokens()
+    const statements = ParserFactory.getParser(tokens).parse();
+    const translation = TranslatorFactory.getTranslator(statements).translate();
+
+    expect(translation).toEqual(
+      [
+        "{ a = a + 2 }"
+      ])
+  });
+
 
 
 

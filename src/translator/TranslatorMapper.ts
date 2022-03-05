@@ -13,7 +13,8 @@ import {
   IfStmt,
   LiteralExpr,
   NumericalExpr,
-  ReturnStmt, Statement,
+  ReturnStmt,
+  Statement,
   UnaryExpr,
   WhileStmt
 } from "../parser/ParserTypes";
@@ -132,8 +133,13 @@ export class TranslatorMapper {
   }
 
   private visitAssignmentExpr(e: AssignmentExpr):string {
-    const assignmentType = e.type === TokenType.CONSTANT ? 'const' : 'var'
     const expr = this.visitExpression(e.right);
+    if ( e.type === TokenType.IDENTIFIER ) {
+      return `${e.identifier} = ${expr}`
+    }
+
+    const assignmentType = e.type === TokenType.CONSTANT ? 'const' : 'var'
+
     return `${assignmentType} ${e.identifier} = ${expr}`
   }
 
@@ -141,11 +147,11 @@ export class TranslatorMapper {
 
     const expr = this.visitExpression(e.expr)
     const thenBranch = this.visitStatement(e.thenBranch)
-    return `if ( ${expr} ) {${thenBranch}}`
+    return `if ( ${expr} ) ${thenBranch}`
   }
 
   private visitWhileStmt(e: WhileStmt) {
-    return `while ( ${this.visitExpression(e.expr)} ) {${this.visitStatement(e.statement)}}`
+    return `while ( ${this.visitExpression(e.expr)} ) ${this.visitStatement(e.statement)}`
   }
 
   private visitElseIfStmt(e: ElseIfStmt) {
@@ -155,11 +161,11 @@ export class TranslatorMapper {
   private visitBlockStmt(e: BlockStmt) {
 
     if ( e.statements.length === 0) {
-      return  ''
+      return  '{}'
     }
 
-    return e.statements.map(e => this.visitStatement(e))
-      .join("\n");
+    return '{ ' + e.statements.map(e => this.visitStatement(e))
+      .join("\n") + ' }';
   }
 
   private visitReturnStmt(e: ReturnStmt) {
@@ -167,7 +173,7 @@ export class TranslatorMapper {
   }
 
   private visitFunctionStmt(e: FunctionStmt) {
-      return `function ${e.identifier} (${e.parameters.join(",")}) {${this.visitStatement(e.body)}}`
+      return `function ${e.identifier} (${e.parameters.join(",")}) ${this.visitStatement(e.body)}`
   }
 
   private visitBooleanExpr(e: BooleanExpr) {
