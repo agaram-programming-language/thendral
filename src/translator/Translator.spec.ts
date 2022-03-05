@@ -85,6 +85,19 @@ describe("Translator Tests", () => {
 
   });
 
+  it("Test should translate group expression correctly", () => {
+
+    const tokens = TokenizerFactory.getTokenizer("(1+1)").getTokens()
+    const statements = ParserFactory.getParser(tokens).parse();
+    const translation = TranslatorFactory.getTranslator(statements).translate();
+
+    expect(translation).toEqual(
+      [
+        "( 1 + 1 )"
+      ])
+
+  });
+
 
 
 })

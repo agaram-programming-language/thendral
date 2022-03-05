@@ -87,6 +87,9 @@ export class TranslatorMapper {
     else if (expr instanceof CallExpr ){
       return this.visitCallExpr(expr)
     }
+    else if ( expr instanceof GroupingExpr ) {
+      return this.visitGroupingExpr(expr)
+    }
   }
 
   private visitBinaryExpr(e: BinaryExpr):string {
@@ -97,7 +100,7 @@ export class TranslatorMapper {
   }
 
   private visitGroupingExpr(e: GroupingExpr) {
-    return this.visitExpression(e.expr)
+    return `( `  + this.visitExpression(e.expr) + ` )`
   }
 
   private visitUnaryExpr(e: UnaryExpr) {
