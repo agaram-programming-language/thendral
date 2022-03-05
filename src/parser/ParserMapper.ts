@@ -132,7 +132,8 @@ export class ParserMapper {
 
     if (this.iterator.match(TokenType.CONSTANT, TokenType.VARIABLE)) {
       return this.variableStatement();
-    } else if (this.iterator.match(TokenType.IF)) {
+    }
+    else if (this.iterator.match(TokenType.IF)) {
       return this.ifStatement();
     } else if (this.iterator.match(TokenType.OPEN_BRACE)) {
       return this.blockStatement();

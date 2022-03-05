@@ -94,7 +94,7 @@ export class TokenMapper {
           break
 
         case '&':
-          if (this.iterator.peek() === '&') {
+          if (this.iterator.current() === '&') {
             this.iterator.advance()
             this.addToken(TokenType.LOGICAL_AND)
           } else {
@@ -104,7 +104,7 @@ export class TokenMapper {
           break
 
         case '|':
-          if (this.iterator.peek() === '|') {
+          if (this.iterator.current() === '|') {
             this.iterator.advance()
             this.addToken(TokenType.LOGICAL_OR)
           } else {
@@ -115,7 +115,7 @@ export class TokenMapper {
 
 
         case '<':
-          if (this.iterator.peek() === '=') {
+          if (this.iterator.current() === '=') {
             this.iterator.advance()
             this.addToken(TokenType.LESSER_THAN_OR_EQUAL_TO)
           } else {
@@ -124,7 +124,7 @@ export class TokenMapper {
           break
 
         case '>':
-          if (this.iterator.peek() === '=') {
+          if (this.iterator.current() === '=') {
             this.iterator.advance()
             this.addToken(TokenType.GREATER_THAN_OR_EQUAL_TO)
           }
@@ -134,7 +134,7 @@ export class TokenMapper {
           break
 
         case '=':
-          if (this.iterator.peek() === '=') {
+          if (this.iterator.current() === '=') {
             this.iterator.advance()
             this.addToken(TokenType.EQUALS_EQUALS)
           }
@@ -145,7 +145,7 @@ export class TokenMapper {
 
         case "'":
           let value:string = '';
-          while ( ! this.iterator.isAtEnd() && this.iterator.peek() !== "'" ) {
+          while ( ! this.iterator.isAtEnd() && this.iterator.current() !== "'" ) {
             value += this.iterator.consume()
           }
           // consume the stray ' character from string
@@ -153,7 +153,7 @@ export class TokenMapper {
           this.addTokenWithValue(TokenType.STRING, value)
           break
         case "!":
-          if (this.iterator.peek() === '=') {
+          if (! this.iterator.isAtEnd() && this.iterator.current() == '=') {
             this.iterator.advance()
             this.addToken(TokenType.NOT_EQUALS)
           }

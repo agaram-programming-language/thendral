@@ -29,17 +29,17 @@ export abstract class Iterator<T> {
 
   current():T {
     if ( this.isAtEnd() ) {
-      throw new Error("Attempting to get current token at end")
+      throw new Error("Attempting to find current token at end")
     }
     return this.items[0];
   }
 
 
-  peek(): T | boolean {
+  peek(): T | boolean  {
     if ( this.isAtEnd() ) {
       return false
     }
-    return this.items[0]
+    return this.items[1]
   }
 
   unsafePeek(): T  {
