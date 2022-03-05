@@ -184,7 +184,8 @@ export class TokenMapper {
       'ஆகவளையம்' : TokenType.FOR,
       'இல்லையென்றால்': TokenType.ELSE_IF,
       'செயல்பாடு' : TokenType.FUNCTION,
-      'திருப்பு': TokenType.RETURN
+      'திருப்பு': TokenType.RETURN,
+      'எழுது': TokenType.PRINT
     }
     return keywordMap[keyword] ? keywordMap[keyword] : TokenType.IDENTIFIER
   }
