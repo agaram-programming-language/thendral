@@ -30,19 +30,26 @@ export class ParserIterator extends Iterator<Token> {
     if ( this.isAtEnd() ) {
       return false;
     }
+    return this.unsafeCurrent().type === tokenType;
+  }
+
+  checkNext(tokenType:TokenType):boolean {
+    if ( this.isAtEnd() ) {
+      return false;
+    }
     return this.unsafePeek().type === tokenType;
   }
 
 
   isAtEnd(): boolean {
-    return super.isAtEnd() || this.unsafePeek().type === TokenType.EOF;
+    return super.isAtEnd() || this.unsafeCurrent().type === TokenType.EOF;
   }
 
   advanceIf(expectedTokenType:TokenType) {
     if ( this.isAtEnd() ) {
       throw new Error("cant advance, reached EOF")
     }
-    const token = this.unsafePeek();
+    const token = this.unsafeCurrent();
     if ( token.type !== expectedTokenType ) {
       throw new Error(`expected ${expectedTokenType} but got ${token.type}`)
     }
@@ -53,12 +60,21 @@ export class ParserIterator extends Iterator<Token> {
     if ( this.isAtEnd() ) {
       throw new Error("cant advance, reached EOF")
     }
-    const token = this.unsafePeek();
+    const token = this.unsafeCurrent();
     for (let type of tokenTypes) {
       if( this.check(type)) {
         return this.consume();
       }
     }
     throw new Error(`expected token types ${tokenTypes.join(",")} doesnt match ${token.type}`)
+  }
+
+  matchNext(...tokenTypes:TokenType[]) {
+    for (let type of tokenTypes) {
+      if( this.checkNext(type)) {
+        return true;
+      }
+    }
+    return false;
   }
 }

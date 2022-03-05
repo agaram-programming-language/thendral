@@ -60,7 +60,7 @@ export class NumericalExpr implements Expr {
 
 export class AssignmentExpr implements Expr {
 
-  constructor(public identifier: string, public type: TokenType.CONSTANT| TokenType.VARIABLE, public right: Expr) {
+  constructor(public identifier: string, public type: TokenType.CONSTANT| TokenType.VARIABLE|TokenType.IDENTIFIER, public right: Expr) {
   }
 }
 

@@ -12,7 +12,8 @@ import {
   IdentifierExpr,
   IfStmt,
   LiteralExpr,
-  NumericalExpr, ReturnStmt,
+  NumericalExpr,
+  ReturnStmt,
   Statement,
   UnaryExpr,
   WhileStmt
@@ -76,7 +77,7 @@ export class ParserMapper {
     // @TODO: cant parse primary.
 
 
-    throw new Error("cant parse primary expr " + JSON.stringify(this.iterator.unsafePeek()) )
+    throw new Error("cant parse primary expr " + JSON.stringify(this.iterator.unsafeCurrent()) )
   }
 
   private equality(): Expr {
@@ -132,6 +133,9 @@ export class ParserMapper {
 
     if (this.iterator.match(TokenType.CONSTANT, TokenType.VARIABLE)) {
       return this.variableStatement();
+    }
+    else if (this.iterator.match(TokenType.IDENTIFIER) && this.iterator.matchNext(TokenType.EQUALS)) {
+      return this.assignmentStatement();
     }
     else if (this.iterator.match(TokenType.IF)) {
       return this.ifStatement();
@@ -271,5 +275,19 @@ export class ParserMapper {
   private returnStatement():Statement {
     this.iterator.advanceIf(TokenType.RETURN);
     return new ReturnStmt( this.expression() );
+  }
+
+  private assignmentStatement() {
+
+    const identifier = this.iterator.consumeIf(TokenType.IDENTIFIER).value
+    // skip the equals sign
+    this.iterator.advanceIf(TokenType.EQUALS)
+
+    const expr = this.expression();
+    return new AssignmentExpr(
+      identifier,
+      TokenType.IDENTIFIER,
+      expr
+    )
   }
 }

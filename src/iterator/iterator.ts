@@ -42,8 +42,13 @@ export abstract class Iterator<T> {
     return this.items[1]
   }
 
-  unsafePeek(): T  {
+
+  unsafeCurrent(): T  {
     return this.items[0]
+  }
+
+  unsafePeek(): T  {
+    return this.items[1]
   }
 
 
