@@ -1132,6 +1132,7 @@ define("translator/Translator", ["require", "exports", "translator/DefaultTransl
 define("Transpiler", ["require", "exports", "tokenizer/Tokenizer", "parser/ParserFactory", "translator/Translator"], function (require, exports, Tokenizer_6, ParserFactory_1, Translator_1) {
     "use strict";
     exports.__esModule = true;
+    exports.thendral = void 0;
     function thendral(code) {
         try {
             var tokens = Tokenizer_6.TokenizerFactory.getTokenizer(code).getTokens();
@@ -1149,4 +1150,5 @@ define("Transpiler", ["require", "exports", "tokenizer/Tokenizer", "parser/Parse
             };
         }
     }
+    exports.thendral = thendral;
 });

@@ -7,7 +7,7 @@ interface Output {
   error: Error
 }
 
-function thendral(code:string): Output {
+export function thendral(code:string): Output {
 
   try {
     const tokens = TokenizerFactory.getTokenizer(code).getTokens()
@@ -25,3 +25,4 @@ function thendral(code:string): Output {
   }
 
 }
+
