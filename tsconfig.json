@@ -1,14 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "removeComments": false,
-    "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "allowJs": true
-  }
+    "module": "AMD",
+    "lib": ["es5", "es6", "dom"],
+    "rootDir": "./src/",
+    "outFile": "./build/build.js",
+
+  },
+  "exclude": [
+    "src/**/*.spec.ts"
+  ]
 }
