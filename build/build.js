@@ -953,7 +953,6 @@ define("translator/TranslatorMapper", ["require", "exports", "parser/ParserTypes
         }
         TranslatorMapper.prototype.getTranslation = function () {
             this.startTranslation();
-            console.log(this.lines);
             return this.lines;
         };
         TranslatorMapper.prototype.startTranslation = function () {
@@ -1076,7 +1075,7 @@ define("translator/TranslatorMapper", ["require", "exports", "parser/ParserTypes
             return "elseif ( ".concat(this.visitExpression(e.expr), " ) ").concat(this.visitStatement(e.statement));
         };
         TranslatorMapper.prototype.visitPrintStmt = function (e) {
-            return "document.write( ".concat(this.visitExpression(e.expr), " )");
+            return "console.log( ".concat(this.visitExpression(e.expr), " )");
         };
         TranslatorMapper.prototype.visitBlockStmt = function (e) {
             var _this = this;

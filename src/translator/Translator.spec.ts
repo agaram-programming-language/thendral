@@ -157,7 +157,7 @@ describe("Translator Tests", () => {
 
     expect(translation).toEqual(
       [
-        "document.write( 2 )"
+        "console.log( 2 )"
       ])
   });
 

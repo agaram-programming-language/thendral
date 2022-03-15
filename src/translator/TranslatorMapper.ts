@@ -30,7 +30,6 @@ export class TranslatorMapper {
 
   getTranslation(): string[] {
     this.startTranslation();
-    console.log(this.lines)
     return this.lines;
   }
 
@@ -174,7 +173,7 @@ export class TranslatorMapper {
   }
 
   private visitPrintStmt(e:PrintStmt) {
-    return `document.write( ${this.visitExpression(e.expr)} )`
+    return `console.log( ${this.visitExpression(e.expr)} )`
   }
 
   private visitBlockStmt(e: BlockStmt) {
