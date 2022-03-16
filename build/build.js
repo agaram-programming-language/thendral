@@ -1072,10 +1072,10 @@ define("translator/TranslatorMapper", ["require", "exports", "parser/ParserTypes
             return "while ( ".concat(this.visitExpression(e.expr), " ) ").concat(this.visitStatement(e.statement));
         };
         TranslatorMapper.prototype.visitElseIfStmt = function (e) {
-            return "elseif ( ".concat(this.visitExpression(e.expr), " ) ").concat(this.visitStatement(e.statement));
+            return "else if ( ".concat(this.visitExpression(e.expr), " ) ").concat(this.visitStatement(e.statement));
         };
         TranslatorMapper.prototype.visitPrintStmt = function (e) {
-            return "console.log( ".concat(this.visitExpression(e.expr), " )");
+            return "thendralPrint( ".concat(this.visitExpression(e.expr), " )");
         };
         TranslatorMapper.prototype.visitBlockStmt = function (e) {
             var _this = this;

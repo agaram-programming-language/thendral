@@ -169,11 +169,11 @@ export class TranslatorMapper {
   }
 
   private visitElseIfStmt(e: ElseIfStmt) {
-    return `elseif ( ${this.visitExpression(e.expr)} ) ${this.visitStatement(e.statement)}`
+    return `else if ( ${this.visitExpression(e.expr)} ) ${this.visitStatement(e.statement)}`
   }
 
   private visitPrintStmt(e:PrintStmt) {
-    return `console.log( ${this.visitExpression(e.expr)} )`
+    return `thendralPrint( ${this.visitExpression(e.expr)} )`
   }
 
   private visitBlockStmt(e: BlockStmt) {
