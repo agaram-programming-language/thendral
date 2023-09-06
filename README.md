@@ -1,6 +1,6 @@
-தென்றல் - js ஸ்கிரிப்டிங் மொழி [[demo](https://agaram-programming-language.github.io/)]
+# தென்றல் - js ஸ்கிரிப்டிங் மொழி [[demo](https://agaram-programming-language.github.io/)]
 
-Thendral - Thendral transpiles tamil to valid javascript 
+## Thendral - Thendral transpiles tamil to valid javascript 
 
 ### Function declaration
 Thendral
